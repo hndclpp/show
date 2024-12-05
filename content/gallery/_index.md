@@ -1,0 +1,20 @@
+---
+title: "画册"
+type: "gallery"
+layout: "gallery"
+images:
+  - title: "图片标题 1"
+    url: "https://images.pexels.com/photos/2132126/pexels-photo-2132126.jpeg"
+  - title: "图片标题 2"
+    url: "https://images.pexels.com/photos/18699539/pexels-photo-18699539.jpeg"
+  - title: "图片标题 3"
+    url: "https://images.pexels.com/photos/29623798/pexels-photo-29623798.jpeg"
+  - title: "图片标题 4"
+    url: "https://images.pexels.com/photos/3254753/pexels-photo-3254753.jpeg"
+  - title: "图片标题 5"
+    url: "https://images.pexels.com/photos/66258/staniel-cay-swimming-pig-seagull-fish-66258.jpeg"
+  - title: "图片标题 6"
+    url: "https://images.pexels.com/photos/29469534/pexels-photo-29469534.jpeg"
+  - title: "图片标题 7"
+    url: "/images/1.png"
+---

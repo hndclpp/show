@@ -1,0 +1,88 @@
+// 亮色主题（默认）
+:root {
+    --color-bg-rgb: 255, 255, 255;
+    --color-primary-rgb: 0, 123, 255;
+    --color-bg: rgb(var(--color-bg-rgb));
+    --color-text: #333333;
+    --color-border: #dddddd;
+    --color-primary: rgb(var(--color-primary-rgb));
+    --color-secondary: #999;
+    --color-tag-bg: #f4f4f4;
+    --color-card-bg: #ffffff;
+    --mask-bg: #000000;
+}
+
+// 暗色主题
+[data-theme="dark"] {
+    --color-bg-rgb: 26, 26, 26;
+    --color-primary-rgb: 77, 171, 247;
+    --color-bg: rgb(var(--color-bg-rgb));
+    --color-text: #e4e6eb;
+    --color-border: #333333;
+    --color-primary: rgb(var(--color-primary-rgb));
+    --color-secondary: #909399;
+    --color-tag-bg: #2d2d2d;
+    --color-card-bg: #242424;
+    --mask-bg: #ffffff;
+    
+    img {
+        opacity: 0.9;
+        &:hover { opacity: 1; }
+    }
+}
+
+// 主题切换按钮
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    
+    svg {
+        width: 20px;
+        height: 20px;
+        transition: transform var(--transition-normal);
+        
+        &:hover {
+            transform: rotate(45deg);
+            color: #ded40e;
+        }
+    }
+    
+    .theme-toggle-dark {
+        display: none;
+    }
+    .theme-toggle-light {
+        display: block;
+    }
+}
+
+// 暗色模式下的图标显示状态
+[data-theme="dark"] {
+    .theme-toggle {
+        .theme-toggle-dark {
+            display: block;
+        }
+        .theme-toggle-light {
+            display: none;
+        }
+    }
+}
+
+// 移动端适配
+@include mobile {
+    .theme-toggle {
+        padding: 0.4rem;
+        margin-right: 0.75rem;
+        
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+} 

@@ -1,0 +1,57 @@
+// CSS Reset
+
+// 1. 使用border-box
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// 2. 重置基础元素
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+    margin: 0;
+}
+
+// 3. 重置列表样式
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+}
+
+// 4. 设置HTML基础样式
+html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+// 5. 重置媒体元素
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+// 6. 重置表单元素
+input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+}
+
+// 7. 重置链接样式
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+// 8. 设置body基础样式
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+// 9. 避免文本溢出
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+} 

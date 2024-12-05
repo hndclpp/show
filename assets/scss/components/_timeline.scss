@@ -1,0 +1,164 @@
+// 时间轴动画
+@keyframes timelineSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+// 时间轴样式
+.timeline {
+    &-container {
+        max-width: var(--container-width);
+        margin: 0 auto;
+        padding: var(--spacing-sm);
+    }
+
+    &-title {
+        text-align: center;
+        font-size: var(--font-size-h1);
+        margin-bottom: 2rem;
+        color: var(--color-text);
+    }
+    
+    &-list {
+        position: relative;
+        padding-left: 1rem;
+    }
+    
+    &-item {
+        position: relative;
+        margin-bottom: 0.5rem;
+        padding: 0.25rem 0;
+        list-style: none;
+        opacity: 0;
+        transform: translateX(-20px);
+        animation: timelineSlideIn 0.3s ease forwards;
+        
+        @for $i from 1 through 30 {
+            &:nth-child(#{$i}) {
+                animation-delay: #{$i * 0.05}s;
+            }
+        }
+        
+        &::before {
+            content: '>';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-primary);
+            font-family: var(--font-mono);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+        
+        &:hover {
+            &::before {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0.15rem);
+            }
+            
+            .timeline-content {
+                background: var(--color-hover);
+                transform: translateX(0.25rem);
+                border: 1px solid var(--color-primary);
+                
+                .timeline-title {
+                    color: var(--color-primary);
+                }
+            }
+        }
+    }
+    
+    &-content {
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--border-radius);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid transparent;
+        display: block;
+        text-decoration: none !important;
+        margin-bottom: -1px;
+        
+        .timeline-date {
+            color: var(--color-secondary);
+            font-size: var(--font-size-small);
+            font-family: var(--font-mono);
+            margin-right: var(--spacing-sm);
+            display: inline-block;
+        }
+        
+        .timeline-title {
+            color: var(--color-text);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        &:hover {
+            background: var(--color-hover);
+            transform: translateX(0.25rem);
+            border: 1px solid var(--color-primary);
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+            
+            .timeline-title {
+                color: var(--color-primary);
+            }
+        }
+    }
+}
+
+// 移动端适配
+@include mobile {
+    .timeline {
+        &-container {
+            padding: var(--spacing-mobile);
+        }
+        
+        &-title {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        &-list {
+            padding-left: 0.75rem;
+        }
+        
+        &-item {
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0;
+            
+            &::before {
+                left: -0.75rem;
+                font-size: 0.8rem;
+            }
+            
+            &:hover {
+                .timeline-content {
+                    transform: translateX(0.15rem);
+                }
+            }
+        }
+        
+        &-content {
+            padding: 0.25rem 0.5rem;
+            border: none;
+        }
+    }
+}
+
+// 暗色模式
+[data-theme="dark"] {
+    .timeline {
+        &-item::before {
+            color:#999;
+        }
+        
+        &-content:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color:#999;
+        }
+    }
+} 

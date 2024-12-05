@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <div class="timeline-container">
+    <h1 class="timeline-title">{{ .Title }}</h1>
+    <ul class="timeline-list">
+      {{ range .Site.RegularPages.ByDate.Reverse }}
+        {{ if eq .Type "post" }}
+          <li class="timeline-item">
+            <a href="{{ .Permalink }}" class="timeline-content">
+              <span class="timeline-date">{{ .Date.Format "2006-01-02" }}</span>
+              <span class="timeline-title">{{ .Title }}</span>
+            </a>
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

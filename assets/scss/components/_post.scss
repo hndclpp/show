@@ -1,0 +1,104 @@
+// 文章列表容器
+.post-container {
+    .post {
+        margin-bottom: var(--spacing-md);
+        padding: var(--spacing-md);
+        border: 1px solid transparent;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        background: var(--color-card-bg);
+        
+        // 添加动画相关属性
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all var(--transition-normal);
+        
+            &.visible {
+                opacity: 1;
+                transform: translateY(0);
+                }
+        
+        // 标题样式
+        h2 {
+            margin: var(--spacing-sm) 0;           
+            a {
+                color: var(--color-text);
+                text-decoration: none;
+                transition: color var(--transition-fast);
+                
+                &:hover {
+                    color: var(--color-primary);
+                }
+            }
+        }
+
+        
+    }
+}
+
+// 文章元信息
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #999;
+    
+    .meta-item {
+        display: inline-flex;
+        align-items: center;
+        
+        .icon {
+            margin-right: 0.4em;
+            width: 1em;
+            height: 1em;
+        }
+    }
+    
+    .meta-link {
+        display: inline-flex;
+        align-items: center;
+        color: #999;
+        text-decoration: none;
+        transition: color var(--transition-fast);
+        
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+    
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        color: #999;
+        text-decoration: none;
+        transition: color var(--transition-fast);
+        
+        &:not(:last-child)::after {
+            content: " ";
+            margin-right: 0.5em;
+            color: #999;
+        }
+        
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+}
+
+// 移动端适配
+@include mobile {
+    .post-container {
+        .post {
+            padding: var(--spacing-mobile); 
+            font-size:var(--font-size-mobile);        
+            .post-meta {
+                gap: var(--spacing-mobile);
+                font-size: var(--font-size-small);
+            }
+        }
+    }
+} 

@@ -1,0 +1,164 @@
+// 骨架屏动画
+@keyframes skeleton-loading {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+
+// 骨架屏样式
+.skeleton-container {
+    // 初始显示
+    display: block;
+    
+    .skeleton-post {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+        background: var(--color-card-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--color-skeleton-start, #eee) 0%,
+        var(--color-skeleton-middle, #f5f5f5) 50%,
+        var(--color-skeleton-end, #eee) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    border-radius: var(--border-radius);
+
+    &-title {
+        height: 2em;
+        margin-bottom: 1em;
+        width: 100%;
+    }
+
+    &-text {
+        height: 1em;
+        margin-bottom: 0.5em;
+        width: 100%;
+        
+        &:last-child {
+            width: 80%;
+        }
+    }
+}
+
+// 暗色模式适配
+[data-theme="dark"] .skeleton {
+    --color-skeleton-start: #333;
+    --color-skeleton-middle: #3a3a3a;
+    --color-skeleton-end: #333;
+}
+
+// 图片淡入动画
+@keyframes imgFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// 主题切换动画
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+[data-theme="dark"]::view-transition-old(root) { z-index: 1; }
+[data-theme="dark"]::view-transition-new(root) { z-index: 999; }
+::view-transition-old(root) { z-index: 999; }
+::view-transition-new(root) { z-index: 1; }
+
+// 图片动画样式
+.content img {
+    opacity: 0;
+    transform: translateY(20px);
+    
+    &.img-visible {
+        animation: imgFadeIn 0.6s ease forwards;
+    }
+}
+
+// 文章页面骨架屏样式
+.skeleton-single {
+    padding: var(--spacing-md);
+    background: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    
+    .skeleton-title {
+        height: 2.5em;
+        margin-bottom: 1.5em;
+    }
+    
+    .skeleton-content {
+        margin-top: 2em;
+        
+        .skeleton-text {
+            height: 1em;
+            margin-bottom: 1em;
+            
+            // 段落间距
+            &:nth-child(4n) {
+                margin-bottom: 2em;
+            }
+        }
+    }
+    
+    .post-meta {
+        margin-bottom: 2em;
+        
+        .meta-item {
+            margin-right: 1em;
+        }
+    }
+}
+
+// 暗色模式适配
+[data-theme="dark"] .skeleton-single {
+    background: var(--color-card-bg);
+    
+    .skeleton {
+        --color-skeleton-start: #333;
+        --color-skeleton-middle: #3a3a3a;
+        --color-skeleton-end: #333;
+    }
+}
+
+// 搜索结果骨架屏样式
+.search-skeleton {
+    .skeleton-item {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+        background: var(--color-card-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        
+        .skeleton-title {
+            @extend .skeleton;
+            height: 1.8em;
+            width: 60%;
+            margin-bottom: 1em;
+        }
+        
+        .skeleton-summary {
+            .line {
+                @extend .skeleton;
+                height: 1em;
+                margin-bottom: 0.8em;
+                
+                &:first-child {
+                    width: 100%;
+                }
+                
+                &:last-child {
+                    width: 80%;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+} 

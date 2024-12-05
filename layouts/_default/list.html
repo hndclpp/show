@@ -1,0 +1,142 @@
+{{ define "main" }}
+<div class="post-container">
+  <!-- 骨架屏容器 -->
+  <div class="skeleton-container">
+    {{ range (seq 3) }}
+      {{ partial "skeleton-post.html" . }}
+    {{ end }}
+  </div>
+
+  <!-- 实际内容容器 -->
+  <div class="posts-container" style="display: none;">
+    {{ range where .Paginator.Pages "Type" "post" }}
+    <div class="post">
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+      <div class="post-meta">
+        <span class="meta-item">
+          <!-- 日期部分添加链接 -->
+          <a href="/timeline" class="meta-link">
+            <svg class="icon" aria-hidden="true">
+              {{- $weather := .Params.weather -}} {{- if eq $weather "晴" }}
+              <use xlink:href="#icon-sunny"></use>
+              <!-- 夜晚图标 -->
+              {{- else if eq $weather "夜晚" }}
+              <use xlink:href="#icon-night"></use>
+              <!-- 夜晚有雨图标 -->
+              {{- else if eq $weather "夜晚有雨" }}
+              <use xlink:href="#icon-rain-at-night"></use>
+              <!-- 夜晚有雪图标 -->
+              {{- else if eq $weather "夜晚有雪" }}
+              <use xlink:href="#icon-snow-at-night"></use>
+              <!-- 雷图标 -->
+              {{- else if eq $weather "雷" }}
+              <use xlink:href="#icon-thunder"></use>
+              <!-- 多云图标 -->
+              {{- else if eq $weather "多云" }}
+              <use xlink:href="#icon-cloudy"></use>
+              <!-- 阴天图标 -->
+              {{- else if eq $weather "阴" }}
+              <use xlink:href="#icon-overcast"></use>
+              <!-- 雨天图标 -->
+              {{- else if eq $weather "雨" }}
+              <use xlink:href="#icon-rain"></use>
+              <!-- 雾霾图标 -->
+              {{- else if eq $weather "雾" }}
+              <use xlink:href="#icon-fog"></use>
+              <!-- 风天图标 -->
+              {{- else if eq $weather "风" }}
+              <use xlink:href="#icon-windy"></use>
+              <!-- 沙尘暴图标 -->
+              {{- else if eq $weather "沙尘" }}
+              <use xlink:href="#icon-sandstorm"></use>
+              <!-- 雪天图标 -->
+              {{- else if eq $weather "雪" }}
+              <use xlink:href="#icon-snow"></use>
+              <!-- 冰雹图标 -->
+              {{- else if eq $weather "冰雹" }}
+              <use xlink:href="#icon-hail"></use>
+              {{- else }}
+              <!-- 默认日期图标 -->
+              <use xlink:href="#icon-date"></use>          
+              {{- end }}
+            </svg>
+            {{ .Date.Format "2006-01-02" }}
+          </a>
+        </span>
+
+        <!-- 显示位置 -->
+        {{ if .Params.location }}
+        <span class="meta-item">
+          <svg class="icon" aria-hidden="true">
+            <!-- 位置图标 -->
+            <use xlink:href="#icon-location"></use>
+          </svg>
+          {{ .Params.location }}
+        </span>
+        {{ end }}
+
+        <!-- 标签部分修改 -->
+        {{ if .Params.tags }}
+        <span class="meta-item">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-tags"></use>
+          </svg>
+          {{ range .Params.tags }}
+          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+          {{ end }}
+        </span>
+        {{ end }}
+      </div>
+      <!-- 摘要内容 -->
+      <p class="summary">
+  {{- $lines := split .Plain "\n" -}}
+  {{- range first 3 $lines -}}
+    {{ . }}<br/>
+  {{- end -}}
+</p>
+    </div>
+    {{ end }}
+
+    <!-- 分页导航 -->
+    {{ if or .Paginator.HasPrev .Paginator.HasNext }}
+    <div class="pagination">
+      {{ if .Paginator.HasPrev }}
+      <a href="{{ .Paginator.Prev.URL }}" class="prev">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-prevent"></use>
+        </svg>
+        上一页
+      </a>
+      {{ end }}
+      
+      <span class="page-number">{{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
+      
+      {{ if .Paginator.HasNext }}
+      <a href="{{ .Paginator.Next.URL }}" class="next">
+        下一页
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-next"></use>
+        </svg>
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<script>
+// 等待所有资源加载完成
+document.addEventListener('DOMContentLoaded', function() {
+    // 给一个短暂的延迟以确保平滑过渡
+    setTimeout(function() {
+        const skeletonContainer = document.querySelector('.skeleton-container');
+        const postsContainer = document.querySelector('.posts-container');
+        
+        if (skeletonContainer && postsContainer) {
+            skeletonContainer.style.display = 'none';
+            postsContainer.style.display = 'block';
+        }
+    }, 300); // 300ms 延迟
+});
+</script>
+{{ end }}

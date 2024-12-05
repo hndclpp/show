@@ -1,0 +1,35 @@
+// 基础容器样式
+%base-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 1.25rem);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+// 主容器
+.container {
+    @extend %base-container;
+    flex: 1;
+    margin-top: var(--header-height-mobile);
+    min-height: unset;   
+    @media (min-width: 769px) {
+        margin-top: calc(var(--spacing-md) * 3);
+    }
+}
+
+// 其他容器统一样式
+.single-container,
+.search-container,
+.post-container,
+.archive-container,
+.tags-container,
+.page-container,
+.list-container {
+    @extend %base-container;
+    
+    @include mobile {
+        padding: var(--spacing-mobile);
+    }
+} 
