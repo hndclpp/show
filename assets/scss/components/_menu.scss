@@ -1,0 +1,145 @@
+// 移动端菜单
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: var(--header-height-mobile);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-bg);
+    padding: var(--container-padding);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    z-index: 99;
+    
+    @include mobile {
+        display: block;
+        visibility: hidden;  
+        opacity: 0;
+        transform: translateY(-2rem);
+        transition: all 0.3s ease;
+        
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-mobile);
+            
+            a {
+                font-size: var(--font-size-h3);
+                padding: var(--spacing-mobile);
+                text-align: center;
+                
+                &:hover {
+                    background: var(--color-hover);
+                    border-radius: var(--border-radius);
+                }
+            }
+        }
+    }
+}
+
+// 菜单切换按钮
+.menu-toggle {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 1001;
+    
+    span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: var(--color-text);
+        transition: transform 0.3s ease;
+    }
+    
+    &.active {
+        span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        span:nth-child(2) { opacity: 0; }
+        span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    }
+}
+
+// 菜单遮罩层
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-bg);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+// 菜单内容
+.menu-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// 菜单项目
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    
+    li {
+        margin: 1.5rem 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+    
+    &.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    a {
+        color: var(--color-text);
+        text-decoration: none !important; 
+        font-size: var(--font-size-menu);
+        transition: all 0.3s ease;
+        
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+}
+
+// 禁止滚动
+body.menu-open {
+    overflow: hidden;
+}
+
+// 移动端适配
+@include mobile {
+    .menu-items {
+        padding: var(--spacing-md);
+        
+        a {
+            font-size: var(--font-size-h3);
+        }
+    }
+} 

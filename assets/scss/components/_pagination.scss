@@ -1,0 +1,77 @@
+// 分页导航样式
+.pagination {
+    display: grid;  // 使用网格布局
+    grid-template-columns: 1fr auto 1fr;  // 三列布局：左按钮、页码、右按钮
+    align-items: center;
+    margin: 2em auto;
+    width: 100%;
+    max-width: 500px;
+    gap: 1em;
+    
+    // 页码样式 - 始终在中间
+    .page-number {
+        grid-column: 2;  // 总是在中间列
+        text-align: center;
+        color: var(--color-text);
+        font-size: var(--font-size-base);
+        padding: 0 1em;
+    }
+    
+    // 导航按钮基础样式
+    a {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5em 1em;
+        color: var(--color-text);
+        text-decoration: none;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        transition: all var(--transition-normal);
+        
+        // 图标样式
+        .icon {
+            width: 1em;
+            height: 1em;
+        }
+        
+        // 上一页 - 在左侧
+        &.prev {
+            grid-column: 1;
+            justify-self: end;  // 靠右对齐
+            .icon {
+                margin-right: 0.5em;
+            }
+        }
+        
+        // 下一页 - 在右侧
+        &.next {
+            grid-column: 3;
+            justify-self: start;  // 靠左对齐
+            .icon {
+                margin-left: 0.5em;
+            }
+        }
+        
+        // 悬停效果
+        &:hover {
+            color: #fff;
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+    }
+    
+    // 移动端适配
+    @include mobile {
+        max-width: 100%;
+        
+        a {
+            padding: 0.4em 0.8em;
+            font-size: var(--font-size-small);
+        }
+        
+        .page-number {
+            font-size: var(--font-size-small);
+        }
+    }
+} 

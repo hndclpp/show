@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oOPS</title>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <style>
+        .lottie-container {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+       
+        dotlottie-player {
+            width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .lottie-container {
+                padding: 10px; /* 缩小边距 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lottie-container">
+        <dotlottie-player
+            src="https://lottie.host/b0367fe8-9590-4c06-8cfa-be028a390560/5cVtawGmzk.lottie"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay>
+        </dotlottie-player>
+        <a href="/"> 返回首页</a>
+    </div>
+</body>
+</html>
