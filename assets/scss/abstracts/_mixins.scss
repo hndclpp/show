@@ -1,6 +1,0 @@
-// 移动端适配
-@mixin mobile {
-    @media (max-width: 768px) {
-        @content;
-    }
-} 
