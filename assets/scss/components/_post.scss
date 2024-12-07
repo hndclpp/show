@@ -20,7 +20,8 @@
         
         // 标题样式
         h2 {
-            margin: var(--spacing-sm) 0;           
+            margin: var(--spacing-sm) 0;
+            font-size: var(--font-size-heading);           
             a {
                 color: var(--color-text);
                 text-decoration: none;
@@ -43,7 +44,7 @@
     align-items: center;
     gap: var(--spacing-sm);
     margin: var(--spacing-sm) 0;
-    font-size: 14px;
+    font-size:var(--font-size-meta);
     font-weight: bold;
     color: #999;
     
@@ -51,11 +52,11 @@
         display: inline-flex;
         align-items: center;
         
-        .icon {
-            margin-right: 0.4em;
-            width: 1em;
-            height: 1em;
-        }
+    .icon {
+      width: var(--icon--size);
+      height: var(--icon--size);
+      vertical-align: baseline;
+    }
     }
     
     .meta-link {

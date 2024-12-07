@@ -2,10 +2,11 @@
   
   .post-meta {
     margin-top: 1rem;
+    font-size:var(--font-size-meta);
 
     .icon {
-      width: 1em;
-      height: 1em;
+      width: var(--icon--size);
+      height: var(--icon--size);
       vertical-align: baseline;
     }
   }
@@ -25,17 +26,17 @@
     line-height: var(--line-height);
     font-weight: 600;
     font-size: var(--font-size-heading);
-    margin: 1.2em 0;
+    margin: 1.2rem 0;
   }
   
   pre {
     background-color: #0d1117 !important;
+    font-size: var(--font-size-code);
+    font-family: var(--font-main);
     color: #abb2bf;
     padding: 1rem;
-    margin: 1rem 0;
     border-radius: var(--border-radius);
     overflow-x: auto;
-    font-size: var(--font-size-small);
     line-height: 1.6;
     @extend %scrollbar;
 
@@ -62,7 +63,7 @@
     // 移动端适配
     @include mobile {
         margin: var(--spacing-mobile) -var(--spacing-mobile);
-        padding: var(--spacing-mobile);
+/*        padding: var(--spacing-mobile);*/
         border-radius: 0;
     }
 }
@@ -239,7 +240,7 @@
           }
 
       p {
-          padding: var(--spacing-mobile); 
+/*          padding: var(--spacing-mobile); */
           font-size:var(--font-size-mobile); 
           margin: 0.5rem 0;       
         }

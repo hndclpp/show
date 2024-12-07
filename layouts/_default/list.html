@@ -88,12 +88,7 @@
         {{ end }}
       </div>
       <!-- 摘要内容 -->
-      <p class="summary">
-  {{- $lines := split .Plain "\n" -}}
-  {{- range first 3 $lines -}}
-    {{ . }}<br/>
-  {{- end -}}
-</p>
+	<p class="summary">{{ .Summary }}</p>
     </div>
     {{ end }}
 

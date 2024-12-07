@@ -1,0 +1,235 @@
+{{ define "main" }}
+<div class="gallery-container">
+    <div class="masonry-grid">
+        {{ range .Params.images }}
+        <div class="masonry-item">
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" aria-label="View {{ .title }}">
+                <img src="{{ .url }}" alt="{{ .title }}" loading="lazy" class="lazy-img" data-title="{{ .title }}" data-src="{{ .url }}">
+                <div class="masonry-title">{{ .title }}</div>
+            </a>
+        </div>
+        {{ end }}
+    </div>
+</div>
+
+<!-- 模态框 -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modal-image" src="" alt="">
+        <div id="modal-title"></div>
+    </div>
+</div>
+
+<style>
+/* 容器样式 */
+.gallery-container {
+    padding: 20px;
+    text-align: center;
+}
+
+/* 瀑布流网格 */
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+/* 单个图片项 */
+.masonry-item {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s;
+}
+
+.masonry-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.masonry-item img.loaded {
+    opacity: 1;
+}
+
+.masonry-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 8px;
+    font-size: 0.8rem;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: opacity 0.3s, transform 0.3s;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.masonry-item:hover .masonry-title {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.masonry-item img:hover {
+    transform: translateY(-2px);
+}
+
+/* 模态框样式 */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 8px;
+}
+
+.modal-content #modal-title {
+    color: #fff;
+    margin-top: 0.625rem;
+    font-size: 1rem;
+}
+
+.modal .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #ff0000;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 禁止背景滚动时的样式 */
+body.modal-open {
+    overflow: hidden;
+}
+
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.querySelector(".masonry-grid");
+    const items = Array.from(document.querySelectorAll(".masonry-item"));
+    const modal = document.getElementById("modal");
+    const modalImage = document.getElementById("modal-image");
+    const modalTitle = document.getElementById("modal-title");
+
+    // 图片懒加载
+    const lazyLoadImages = () => {
+        const images = document.querySelectorAll("img[data-src]");
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.onload = () => {
+                        img.classList.add("loaded");
+                        resizeGridItem(img.closest('.masonry-item')); // 图片加载后更新网格布局
+                    };
+                    observer.unobserve(img);
+                }
+            });
+        }, { rootMargin: "0px 0px 200px 0px" });
+
+        images.forEach((img) => observer.observe(img));
+    };
+
+    // 动态调整网格项高度
+    const resizeGridItem = (item) => {
+        const img = item.querySelector("img");
+        if (img.complete) {
+            const rowSpan = Math.ceil((img.offsetHeight + 16) / (10 + 16)); // 10是行高
+            item.style.gridRowEnd = `span ${rowSpan}`;
+        }
+    };
+
+    // 初始化瀑布流布局
+    const initMasonryGrid = () => {
+        items.forEach((item) => {
+            const img = item.querySelector("img");
+            if (img.complete) {
+                resizeGridItem(item);
+            } else {
+                img.onload = () => resizeGridItem(item);
+            }
+        });
+
+        // 窗口大小变化时重新调整布局
+        window.addEventListener("resize", () => items.forEach(resizeGridItem));
+    };
+
+    // 模态框显示/关闭功能
+    const showModal = (img) => {
+        modal.style.display = "flex";
+        modalImage.src = img.src;
+        modalTitle.textContent = img.dataset.title || "Image";
+        document.body.classList.add("modal-open");
+    };
+
+    const hideModal = () => {
+        modal.style.display = "none";
+        document.body.classList.remove("modal-open");
+    };
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal || e.target.classList.contains("close")) {
+            hideModal();
+        }
+    });
+
+    // 绑定模态框打开事件
+    items.forEach((item) => {
+        const img = item.querySelector("img");
+        const title = item.querySelector(".masonry-title");
+
+        // 点击图片打开模态框
+        img.addEventListener("click", (e) => {
+            e.preventDefault();
+            showModal(img);
+        });
+
+        // 点击标题打开模态框
+        title.addEventListener("click", (e) => {
+            e.preventDefault();
+            showModal(img); // 使用图片的 `src` 和 `title`
+        });
+    });
+
+    // 初始化
+    lazyLoadImages();
+    initMasonryGrid();
+});
+</script>
+{{ end }}

@@ -1,6 +1,7 @@
 ---
 title: "搜索"
-type: "search"
+type: "page"
 layout: "search"
+url: "/search/"
 ---
 这里显示搜索
