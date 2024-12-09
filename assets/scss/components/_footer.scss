@@ -4,6 +4,7 @@
     width: 100%;
     background: var(--color-bg);
     color: var(--color-secondary);
+    z-index:99;
 
     .footer {
         margin: 0 auto;
@@ -15,20 +16,24 @@
         p {
             margin: 0;
             font-size: var(--font-size-meta);
+
             br {
                 display: none; // 默认隐藏换行符
             }
         }
 
         a {
-            color: var(--color-primary);
             text-decoration: none;
-            transition: opacity var(--transition-fast);
+            transition: color var(--transition-slow);
 
             &:hover {
-                opacity: 0.8;
+                color: var(--color-primary);
             }
         }
+
+        
+
+
     }
 
     @include mobile {
@@ -40,8 +45,6 @@
                 br {
                     display: block; // 移动端强制换行
                     margin-top: var(--spacing-xs); // 增加换行间距
-                }
-            }
-        }
+                }}}
     }
 }

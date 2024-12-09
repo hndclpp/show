@@ -8,6 +8,7 @@
       width: var(--icon--size);
       height: var(--icon--size);
       vertical-align: baseline;
+      margin-right:var(--spacing-xs);
     }
   }
 
@@ -33,7 +34,7 @@
     background-color: #0d1117 !important;
     font-size: var(--font-size-code);
     font-family: var(--font-main);
-    color: #abb2bf;
+/*    color: #abb2bf;*/
     padding: 1rem;
     border-radius: var(--border-radius);
     overflow-x: auto;
@@ -221,15 +222,43 @@
 
   img {
 
-    opacity: 0.8;
-    transition: opacity 0.5s ease, box-shadow 0.5s ease;
+/*    opacity: 0.8;*/
+    transition: opacity var(--transition-slow), box-shadow var(--transition-slow);
     
     &:hover {
-      opacity: 1;
+/*      opacity: 1;*/
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
   }
 }
+
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+
+
+    a {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-size: var(--font-size-base);
+         transition: color var(--transition-normal);
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+
+    .prev-post {
+        text-align: left;
+    }
+
+    .next-post {
+        text-align: right;
+    }
+}
+
 
 // 移动端适配
 @include mobile {
@@ -240,7 +269,6 @@
           }
 
       p {
-/*          padding: var(--spacing-mobile); */
           font-size:var(--font-size-mobile); 
           margin: 0.5rem 0;       
         }

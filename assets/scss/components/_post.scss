@@ -52,10 +52,11 @@
         display: inline-flex;
         align-items: center;
         
-    .icon {
+        .icon {
       width: var(--icon--size);
       height: var(--icon--size);
       vertical-align: baseline;
+      margin-right:var(--spacing-xs);
     }
     }
     

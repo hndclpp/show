@@ -49,6 +49,21 @@
             <div class="content">
                     {{ .Content }}
             </div>
+
+<!-- 导航：上一篇和下一篇 -->
+<div class="post-navigation">
+    {{ if .Prev }}
+    <a href="{{ .Prev.Permalink }}" class="prev-post">
+        ← 上一篇: {{ .Prev.Title }}
+    </a>
+    {{ end }}
+    {{ if .Next }}
+    <a href="{{ .Next.Permalink }}" class="next-post">
+        下一篇: {{ .Next.Title }} →
+    </a>
+    {{ end }}
+</div>
+
         </article>
     </div>
 </div>
