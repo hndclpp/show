@@ -52,16 +52,22 @@
 
 <!-- 导航：上一篇和下一篇 -->
 <div class="post-navigation">
-    {{ if .Prev }}
-    <a href="{{ .Prev.Permalink }}" class="prev-post">
-        ← 上一篇: {{ .Prev.Title }}
-    </a>
-    {{ end }}
-    {{ if .Next }}
-    <a href="{{ .Next.Permalink }}" class="next-post">
-        下一篇: {{ .Next.Title }} →
-    </a>
-    {{ end }}
+    <div class="nav-previous">
+        {{ with .PrevInSection }}
+        <a href="{{ .Permalink }}" class="prev-post">
+            <span class="nav-label">« 上一篇</span>
+            <span class="nav-title">{{ .Title }}</span>
+        </a>
+        {{ end }}
+    </div>
+    <div class="nav-next">
+        {{ with .NextInSection }}
+        <a href="{{ .Permalink }}" class="next-post">
+            <span class="nav-label">下一篇 »</span>
+            <span class="nav-title">{{ .Title }}</span>
+        </a>
+        {{ end }}
+    </div>
 </div>
 
         </article>

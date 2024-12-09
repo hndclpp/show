@@ -11,3 +11,5 @@
     </p>
   </div>
 </footer>
+{{ $easter_eggs := resources.Get "js/easter_eggs.js" | minify | fingerprint }}
+<script src="{{ $easter_eggs.RelPermalink }}"></script>

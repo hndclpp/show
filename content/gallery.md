@@ -6,8 +6,6 @@ url: "/gallery/"
 images:
   - title: "大象"
     url: "https://cdn.pixabay.com/photo/2023/09/14/19/46/elephant-8253639_1280.jpg"
-  - title: "骑士剧院恶龙"
-    url: "https://cdn.pixabay.com/photo/2024/01/24/22/22/knight-8530654_1280.jpg"
   - title: "自行车"
     url: "https://cdn.pixabay.com/photo/2017/12/28/16/18/bicycle-3045580_1280.jpg"
   - title: "森林"

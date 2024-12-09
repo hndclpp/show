@@ -25,11 +25,12 @@
 @import "components/timeline"; 
 
 // 6. 功能性组件（按需加载）
+@import "components/gallery";
 @import "components/timeline";
 @import "components/back-to-top"; 
 
 // 7. 装饰性样式
 @import "base/animations";
-
+@import "components/easter_eggs";
 // 8. 短代码（最后加载）
 @import "components/note";

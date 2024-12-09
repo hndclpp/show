@@ -1,0 +1,53 @@
+// 特效样式
+._x {
+    animation: _r 2s linear infinite;
+}
+
+@keyframes _r {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+// 粒子特效样式
+._p {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+}
+
+._q {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes _a {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+@keyframes _b {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(30);
+        opacity: 0;
+    }
+} 

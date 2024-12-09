@@ -8,12 +8,11 @@
     --font-size-h1: clamp(1.375rem, 1.25vw, 1.5rem);
     --font-size-h2: clamp(1.25rem, 1.25vw, 1.375rem);
     --font-size-h3: clamp(1.125rem, 1.25vw, 1.25rem);
-    --font-size-code: clamp(0.875rem, 1.25vw, 1rem);
+    --font-size-code: clamp(0.9rem, 1vw, 0.9rem);
     --font-size-meta: clamp(0.75rem, 1.25vw, 0.9rem);
     --font-size-menu: clamp(1.25rem, 1.25vw, 2rem);
     --font-size-gallery: clamp(0.5rem, 1.25vw, 0.8rem);
     --font-size-close:clamp(1rem, 1.25vw, 1.5rem);
-
     --icon--size: clamp(0.75rem, 1.25vw, 0.9rem);
     
     // 颜色
@@ -28,6 +27,7 @@
     --color-tag-bg: #f4f4f4;
     --color-quote-bg: #007bff;
     --color-footer-link: pink;
+    --color-code-bg: #000000;
     --mask-bg: #fff;
     
     // 间距

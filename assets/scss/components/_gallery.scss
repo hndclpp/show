@@ -1,0 +1,121 @@
+/* 容器样式 */
+.gallery-container {
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+/* 瀑布流网格 */
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* 单个图片项 */
+.masonry-item {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s;
+
+    a{
+        // position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.masonry-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: all var(--transition-normal);
+    border-radius: var(--border-radius);
+}
+
+.masonry-item img.loaded {
+    opacity: 1;
+}
+
+.masonry-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-gallery);
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(25px);
+    transition: opacity 0.3s, transform 0.3s;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.masonry-item:hover .masonry-title {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-5px);
+}
+
+.masonry-item img:hover {
+    transform: translateY(-5px);
+}
+
+/* 模态框样式 */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--mask-bg);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: var(--border-radius);
+}
+
+.modal-content #modal-title {
+    color: #fff;
+    margin-top: 0.625rem;
+    font-size: var(--font-size-gallery);
+}
+
+.modal .close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #ff0000;
+    font-size: var(--font-size-close);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+/* 禁止背景滚动时的样式 */
+body.modal-open {
+    overflow: hidden;
+}
