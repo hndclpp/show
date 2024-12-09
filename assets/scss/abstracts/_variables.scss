@@ -35,7 +35,7 @@
     --space-icon: 0.125rem;
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
+    --spacing-md: clamp(0.5rem, 1.25vw, 1rem);
     --spacing-lg: 1.5rem;
     --border-radius: 0.25rem;
     
