@@ -1,8 +1,7 @@
-/* 文章列表动画 */
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
+    // 文章列表动画
     const posts = document.querySelectorAll(".post");
-
-    const observer = new IntersectionObserver(
+    const postObserver = new IntersectionObserver(
         (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -16,20 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
             threshold: 0.1, // 10% 可见时触发
         }
     );
-
     posts.forEach((post, index) => {
         post.style.setProperty("--delay", `${index * 0.2}s`);
-        observer.observe(post); // 仅观察即将进入视窗的元素
+        postObserver.observe(post); // 仅观察即将进入视窗的元素
     });
-});
 
-
-/* 时间轴动画 */    
-document.addEventListener('DOMContentLoaded', function() {
+    // 时间轴动画
     const items = document.querySelectorAll('.timeline-item');
     let batchSize = 10; // 每批动画的项目数量
     let currentIndex = 0;
-
     function animateBatch() {
         for (let i = 0; i < batchSize && currentIndex < items.length; i++, currentIndex++) {
             const item = items[currentIndex];
@@ -39,31 +33,42 @@ document.addEventListener('DOMContentLoaded', function() {
             requestAnimationFrame(animateBatch);
         }
     }
-
     requestAnimationFrame(animateBatch);
-});
 
-
-/* 处理图片加载 */
-document.addEventListener('DOMContentLoaded', function() {
-    const observer = new IntersectionObserver((entries) => {
+    // 图片加载处理
+    const imgObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('img-visible');
-                observer.unobserve(entry.target);
+                imgObserver.unobserve(entry.target);
             }
         });
     }, {
         threshold: 0.1
     });
-
     const images = document.querySelectorAll('.content img');
     images.forEach(img => {
         if (img.complete) {
-            observer.observe(img);
+            imgObserver.observe(img);
         } else {
-            img.onload = () => observer.observe(img);
+            img.onload = () => imgObserver.observe(img);
+        }
+    });
+
+    // 返回顶部按钮
+    const backToTop = document.createElement('button');
+    backToTop.classList.add('back-to-top');
+    backToTop.innerHTML = '↑';
+    document.body.appendChild(backToTop);
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
         }
     });
 });
-

@@ -1,17 +1,46 @@
 {{ define "main" }}
-<div class="search-container">   
+<!-- 搜索无障碍优化 2024/12/10 -->
+
+<!-- 跳转到主要内容 -->
+<a href="#main-content" class="visually-hidden skip-link">跳到主要内容</a>
+
+<div class="search-container">
+
+    <!-- 主内容区域 -->
+    <main id="main-content" aria-label="搜索页面">
+
+    <!-- 搜索框 -->
     <div class="search-box">
-        <input type="text" id="search-input" placeholder="请输入搜索关键词..." />
-        <button id="search-button">
+
+        <!-- 为输入框增加隐藏的 label -->
+        <label for="search-input" class="visually-hidden">搜索框输入</label>
+
+        <input 
+            type="text" 
+            id="search-input" 
+            placeholder="请输入搜索关键词..." 
+            aria-describedby="search-desc" 
+        />
+
+        <!-- 输入框提示 -->
+        <div id="search-desc" class="visually-hidden">
+            输入关键词后点击搜索按钮，或按回车键进行搜索
+        </div>
+
+        <button id="search-button" aria-label="搜索按钮">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-search"></use>
             </svg>
         </button>
     </div>
 
-    <div id="search-history" class="search-history"></div>
+    <!-- 搜索历史 -->
+    <section id="search-history" class="search-history" aria-labelledby="history-title">
+        <h2 id="history-title" class="visually-hidden">搜索历史记录</h2>
+    </section>
     
-    <div id="search-skeleton" class="search-skeleton" style="display: none;">
+    <!-- 骨架屏 -->
+    <div id="search-skeleton" class="search-skeleton" style="display: none;" aria-hidden="true">
         <div class="skeleton-item">
             <div class="skeleton-title"></div>
             <div class="skeleton-summary">
@@ -32,19 +61,20 @@
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
-        </div>
-    </div>
+        </div></div>
 
-    <div id="search-results" class="search-results"></div>
+
+    <!-- 搜索结果 -->
+    <section id="search-results" class="search-results" aria-labelledby="results-title">
+         <h2 id="results-title" class="visually-hidden">搜索结果</h2>
+    </section>
     
-    <div id="pagination" class="pagination"></div>
+    <!-- 分页 -->
+    <nav id="pagination" class="pagination" aria-label="分页导航"></nav>
 </div>
 
 <!-- 使用 unpkg CDN -->
 <script src="https://unpkg.com/fuse.js@6.6.2"></script>
-<!-- 或者使用 cdnjs -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js"></script> -->
-
 <!-- 添加搜索脚本 -->
 {{ $search := resources.Get "js/search.js" | minify | fingerprint }}
 <script src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}"></script>

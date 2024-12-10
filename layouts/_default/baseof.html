@@ -6,7 +6,8 @@
     <meta name="description" content="{{ .Site.Params.description }}" />
     <meta name="keywords" content="{{ .Site.Params.keywords }}" />
     <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css" />
+    <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont/style.css" media="print" onload="this.media='all'">
+
     <!-- 主题样式 -->
     {{ $sass := resources.Get "scss/main.scss" }}
     {{ $style := $sass | css.Sass | resources.Minify | resources.Fingerprint }}
@@ -23,10 +24,8 @@
 
     <!-- 基础功能JS -->
     {{ $js := slice 
-      (resources.Get "js/svg.js")
       (resources.Get "js/theme.js")
       (resources.Get "js/menu.js")
-      (resources.Get "js/mobile.js")
       (resources.Get "js/animation.js")
     }}
     {{ $combined := $js | resources.Concat "js/main.js" | minify | fingerprint }}

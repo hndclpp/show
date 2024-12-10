@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!Array.isArray(data) || data.length === 0) {
                 throw new Error('Invalid search index data');
             }
-            
+
             console.log('Search index loaded:', data);
-            
+
             const options = {
                 keys: [
                     { name: 'title', weight: 0.7 },
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 includeScore: true,
                 minMatchCharLength: 2
             };
-            
+
             fuse = new Fuse(data, options);
             loadSearchHistory();
         })
@@ -50,26 +50,19 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // console.log('开始搜索...');  // 调试日志
-
         // 显示骨架屏，隐藏其他内容
         searchResults.style.display = 'none';
         pagination.style.display = 'none';
         searchSkeleton.style.display = 'block';
 
-        console.log('骨架屏已显示');  // 调试日志
-
         // 模拟加载延迟
         setTimeout(() => {
-            // console.log('开始处理搜索结果');  // 调试日志
             try {
                 allResults = fuse.search(query);
-                
+
                 // 隐藏骨架屏，显示结果
                 searchSkeleton.style.display = 'none';
                 searchResults.style.display = 'block';
-                
-                // console.log('搜索完成，找到结果：', allResults.length);  // 调试日志
 
                 if (allResults.length === 0) {
                     searchResults.innerHTML = '<p class="no-results">未找到相关结果</p>';
@@ -81,17 +74,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayResults(1);
                 updatePagination();
                 addToSearchHistory(query);
-                
+
                 // 显示分页
                 pagination.style.display = 'flex';
             } catch (error) {
-                // console.error('搜索错误：', error);  // 调试日志
                 searchSkeleton.style.display = 'none';
                 searchResults.style.display = 'block';
                 searchResults.innerHTML = '<p class="error">搜索出错，请重试</p>';
                 pagination.style.display = 'none';
             }
-        }, 800); // 增加延迟时间到 800ms，使效果更明显
+        }, 500);
     }
 
     function displayResults(page) {
@@ -104,14 +96,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const item = result.item;
             const div = document.createElement('div');
             div.className = 'search-result-item';
-            
+
             // 创建摘要文本
             let summary = item.summary || item.content;
-            summary = summary.length > 200 ? summary.substring(0, 200) + '...' : summary;
-            
+            summary = summary.length > 100 ? summary.substring(0, 100) + '...' : summary;
+
             div.innerHTML = `
-                <a href="${item.permalink}" class="search-result-title">${item.title}</a>
-                <div class="search-result-summary">${summary}</div>
+                <a href="${item.permalink}" class="search-result-item-link">
+                    <div class="search-result-title">${item.title}</div>
+                    <div class="search-result-summary">${summary}</div>
+                </a>
             `;
             searchResults.appendChild(div);
         });
@@ -180,14 +174,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (searchButton) {
         searchButton.addEventListener('click', performSearch);
     }
-    
+
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 performSearch();
             }
         });
-        
+
         // 添加输入防抖
         let debounceTimer;
         searchInput.addEventListener('input', function() {
@@ -197,4 +191,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     loadSearchHistory();
-});
+});  // 结束 DOMContentLoaded 事件监听器

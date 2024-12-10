@@ -1,8 +1,10 @@
 baseURL = 'https://example.com/'
-languageCode = 'zh-CN' 
+languageCode = 'zh-CN'
 title = '丘丘人'                    # 网站名称
-theme = "show"                # 主题
+theme = "show"                     # 主题
 archetypeDir = "themes/show/archetypes"
+
+paginate = 5  # 设置每页显示 5 篇文章
 
 [markup.goldmark.renderer]
   unsafe = true

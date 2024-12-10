@@ -1,89 +1,62 @@
 {{ define "main" }}
 <div class="single-container">
-    <!-- 骨架屏容器 -->
+    <!-- 骨架屏 -->
     <div class="skeleton-container">
         {{ partial "skeleton-single.html" . }}
     </div>
 
-    <!-- 实际内容容器 -->
-    <div class="post-content" style="display: none;">
-        <!-- 原有的文章内容 -->
-        <article class="post">
-            <!-- 文章标题 -->
-            <h2>{{ .Title }}</h2>
-            <!-- 文章元数据（日期、位置、标签） -->
-            <div class="post-meta">
-                <!-- 日期图标和日期 -->
-                <span class="meta-item">
-                    <a href="/timeline" class="meta-link">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-date-single"></use>
-                        </svg>
-                        {{ .Date.Format "2006-01-02" }}
-                    </a>
-                </span>
+    <!-- 文章内容 -->
+    <article class="post-content" style="display: none;">
+        <h2>{{ .Title }}</h2>
 
-                <!-- 位置图标和位置 -->
-                {{ if .Params.location }}
-                <span class="meta-item">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-location-single"></use> <!-- 位置图标 -->
-                    </svg>
-                    {{ .Params.location }}
-                </span>
+        <!-- 文章元数据 -->
+        <div class="post-meta">
+            <span class="meta-item">
+                <a href="/timeline" class="meta-link">
+                    {{ .Date.Format "2006-01-02" }}
+                </a>
+            </span>
+            {{ if .Params.location }}
+            <span class="meta-item">{{ .Params.location }}</span>
+            {{ end }}
+            {{ if .Params.tags }}
+            <span class="meta-item">
+                {{ range .Params.tags }}
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
                 {{ end }}
+            </span>
+            {{ end }}
+        </div>
 
-                <!-- 标签图标和标签 -->
-                {{ if .Params.tags }}
-                <span class="meta-item">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-tags-single"></use>
-                    </svg>
-                    {{ range .Params.tags }}
-                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
-                    {{ end }}
-                </span>
-                {{ end }}
-            </div>
-            <!-- 文章内容 -->
-            <div class="content">
-                    {{ .Content }}
-            </div>
+        <!-- 文章内容正文 -->
+        <div class="content">
+            {{ .Content }}
+        </div>
 
-<!-- 导航：上一篇和下一篇 -->
-<div class="post-navigation">
-    <div class="nav-previous">
-        {{ with .PrevInSection }}
-        <a href="{{ .Permalink }}" class="prev-post">
-            <span class="nav-label">« 上一篇</span>
-            <span class="nav-title">{{ .Title }}</span>
-        </a>
-        {{ end }}
-    </div>
-    <div class="nav-next">
-        {{ with .NextInSection }}
-        <a href="{{ .Permalink }}" class="next-post">
-            <span class="nav-label">下一篇 »</span>
-            <span class="nav-title">{{ .Title }}</span>
-        </a>
-        {{ end }}
-    </div>
-</div>
+        <!-- 导航：上一篇 下一篇 -->
+        <div class="post-navigation">
+            {{ with .PrevInSection }}
+            <a href="{{ .Permalink }}" class="prev-post">
+                <span class="nav-label">« 上一篇</span>
+                <span class="nav-title">{{ .Title }}</span>
+            </a>
+            {{ end }}
 
-        </article>
-    </div>
+            {{ with .NextInSection }}
+            <a href="{{ .Permalink }}" class="next-post">
+                <span class="nav-label">下一篇 »</span>
+                <span class="nav-title">{{ .Title }}</span>
+            </a>
+            {{ end }}
+        </div>
+    </article>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
-        const skeletonContainer = document.querySelector('.skeleton-container');
-        const postContent = document.querySelector('.post-content');
-        
-        if (skeletonContainer && postContent) {
-            skeletonContainer.style.display = 'none';
-            postContent.style.display = 'block';
-        }
+        document.querySelector('.skeleton-container').style.display = 'none';
+        document.querySelector('.post-content').style.display = 'block';
     }, 300);
 });
 </script>

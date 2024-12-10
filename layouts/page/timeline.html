@@ -1,6 +1,6 @@
 {{ define "main" }}
   <div class="timeline-container">
-    <h1 class="timeline-title special-click">{{ .Title }}</h1>
+    <h1 class="timeline-title">{{ .Title }}</h1>
     <ul class="timeline-list">
       {{ range .Site.RegularPages.ByDate.Reverse }}
         {{ if eq .Type "post" }}

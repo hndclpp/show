@@ -1,20 +1,36 @@
 // 骨架屏动画
 @keyframes skeleton-loading {
-    from { background-position: 200% 0; }
-    to { background-position: -200% 0; }
+    from { transform: translateY(10%); }
+    to { transform: translateY(-10%); }
 }
 
 // 骨架屏样式
 .skeleton-container {
     // 初始显示
-    display: block; 
+    display: block;
+    position: relative;
+    height: 100%; // 确保容器高度自动调整
+
     .skeleton-post {
         padding: var(--spacing-md);
         margin-bottom: var(--spacing-md);
         background: var(--color-card-bg);
-        border: 1px solid var(--color-border);
+/*        border: 1px solid var(--color-border);*/
         border-radius: var(--border-radius);
     }
+}
+
+// 实际内容容器，确保它在骨架屏加载完成时高度与其一致
+.posts-container {
+    display: none;
+    padding: var(--spacing-md);  // 确保与骨架屏的padding一致
+    margin: 0;  // 确保没有额外的间距
+}
+
+// 骨架屏动画
+@keyframes skeleton-opacity {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 .skeleton {
@@ -24,16 +40,19 @@
         var(--color-skeleton-middle, #f5f5f5) 50%,
         var(--color-skeleton-end, #eee) 100%
     );
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite linear;
+    background-size: 100% 50%;
+    animation: skeleton-opacity 2s infinite ease-in-out, skeleton-loading 2s infinite ease-in-out;
+    transform: translateX(0);
     border-radius: var(--border-radius);
 
+    // 标题样式
     &-title {
         height: 2em;
         margin-bottom: 1em;
         width: 100%;
     }
 
+    // 文本样式
     &-text {
         height: 1em;
         margin-bottom: 0.5em;
@@ -45,40 +64,11 @@
     }
 }
 
-// 暗色模式适配
-[data-theme="dark"] .skeleton {
-    --color-skeleton-start: #333;
-    --color-skeleton-middle: #3a3a3a;
-    --color-skeleton-end: #333;
-}
-
 // 图片淡入动画
 @keyframes imgFadeIn {
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-// 主题切换动画
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-}
-
-[data-theme="dark"]::view-transition-old(root) { z-index: 1; }
-[data-theme="dark"]::view-transition-new(root) { z-index: 999; }
-::view-transition-old(root) { z-index: 999; }
-::view-transition-new(root) { z-index: 1; }
-
-// 图片动画样式
-.content img {
-    opacity: 0;
-    transform: translateY(20px);
-    
-    &.img-visible {
-        animation: imgFadeIn 0.6s ease forwards;
     }
 }
 
@@ -133,7 +123,7 @@
         padding: var(--spacing-md);
         margin-bottom: var(--spacing-md);
         background: var(--color-card-bg);
-        border: 1px solid var(--color-border);
+/*        border: 1px solid var(--color-border);*/
         border-radius: var(--border-radius);
         
         .skeleton-title {
@@ -160,4 +150,4 @@
             }
         }
     }
-} 
+}
