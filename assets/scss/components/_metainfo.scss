@@ -1,0 +1,39 @@
+// 元信息样式
+.icon {
+    width: var(--icon--size);
+    height: var(--icon--size);
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    margin-right: var(--space-icon);
+}
+
+.meta-info {
+    display: flex;
+    font-size: var(--font-size-meta);
+    font-weight:bold;
+    color:var(--color-secondary);
+    
+    a{
+        transition: color var(--transition-normal);
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+
+}
+.meta-item {
+    display: flex;
+    align-items: center;
+    margin-right: var(--spacing-sm);
+}
+
+
+// 移动端适配
+@include mobile {
+    .meta-info {
+        gap: var(--spacing-mobile);
+        font-size: var(--font-size-small);
+    }
+}

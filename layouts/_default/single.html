@@ -6,21 +6,37 @@
     </div>
 
     <!-- 文章内容 -->
-    <article class="post-content" style="display: none;">
+    <article class="single-content" style="display: none;">
         <h2>{{ .Title }}</h2>
 
         <!-- 文章元数据 -->
-        <div class="post-meta">
+        <div class="meta-info">           
             <span class="meta-item">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-date-single"></use>
+                </svg>
                 <a href="/timeline" class="meta-link">
                     {{ .Date.Format "2006-01-02" }}
                 </a>
             </span>
+
             {{ if .Params.location }}
-            <span class="meta-item">{{ .Params.location }}</span>
+                <span class="meta-item">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-location-single"></use>
+                </svg>
+                    {{ .Params.location }}
+                </span>
             {{ end }}
+
+
             {{ if .Params.tags }}
             <span class="meta-item">
+
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-tags-single"></use>
+                </svg>
+
                 {{ range .Params.tags }}
                 <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
                 {{ end }}
@@ -32,23 +48,6 @@
         <div class="content">
             {{ .Content }}
         </div>
-
-        <!-- 导航：上一篇 下一篇 -->
-        <div class="post-navigation">
-            {{ with .PrevInSection }}
-            <a href="{{ .Permalink }}" class="prev-post">
-                <span class="nav-label">« 上一篇</span>
-                <span class="nav-title">{{ .Title }}</span>
-            </a>
-            {{ end }}
-
-            {{ with .NextInSection }}
-            <a href="{{ .Permalink }}" class="next-post">
-                <span class="nav-label">下一篇 »</span>
-                <span class="nav-title">{{ .Title }}</span>
-            </a>
-            {{ end }}
-        </div>
     </article>
 </div>
 
@@ -56,7 +55,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         document.querySelector('.skeleton-container').style.display = 'none';
-        document.querySelector('.post-content').style.display = 'block';
+        document.querySelector('.single-content').style.display = 'block';
     }, 300);
 });
 </script>

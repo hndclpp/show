@@ -8,3 +8,5 @@ html, body {
     font-size: var(--font-size-base);
     @extend %scrollbar; // 确保 %scrollbar 已定义
 }
+
+

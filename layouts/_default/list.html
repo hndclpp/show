@@ -1,64 +1,68 @@
 {{ define "main" }}
 <div class="post-container">
   <!-- 骨架屏容器 -->
-  <div class="skeleton-container">
-    {{ range (seq 3) }}
-      {{ partial "skeleton-post.html" . }}
-    {{ end }}
-  </div>
+<div class="skeleton-container">
+  {{ $count := len .Paginator.Pages }}
+  {{ range (seq $count) }}
+    {{ partial "skeleton-post.html" . }}
+  {{ end }}
+</div>
 
-  <!-- 实际内容容器 -->
-  <div class="posts-container" style="display: none;">
-    {{ range .Paginator.Pages }}  <!-- 使用 .Paginator.Pages 来分页 -->
+<!-- 实际内容容器 -->
+<div class="posts-container" style="display: none;">
+  {{ $posts := where .Paginator.Pages "Type" "post" }}
+  {{ if $posts }}
+    {{ range $posts }}
       <div class="post">
         <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-        <!-- 日期、位置和标签合并成一个容器 -->
         <div class="meta-info">
-          <!-- 日期 -->
-          <span class="meta-item meta-weather">
+          <span class="meta-item meta-date">
+          <svg class="icon" aria-hidden="true">
+              {{ $weatherIcons := dict "晴" "sunny" "多云" "cloudy" "阴" "overcast" "雨" "rain" "雷" "thunder" "雪" "snow" "雨夹雪" "rain-and-snow" "冰雹" "hail" "风" "windy" "雾霾" "fog" "沙尘" "sandstorm" "夜晚" "night" "夜晚有雨" "rain-at-night" "夜晚有雪" "snow-at-night"}}
+              {{ $weatherKey := .Params.weather }}
+              {{ $icon := index $weatherIcons $weatherKey | default "date" }}
+              <use xlink:href="#icon-{{ $icon }}"></use>
+          </svg>
             <a href="/timeline" class="meta-link">{{ .Date.Format "2006-01-02" }}</a>
           </span>
-
-          <!-- 位置 -->
           {{ if .Params.location }}
             <span class="meta-item meta-location">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-location"></use>
+              </svg>
               {{ .Params.location }}
             </span>
           {{ end }}
-
-          <!-- 标签 -->
           {{ if .Params.tags }}
             <span class="meta-item meta-tags">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-tags"></use>
+              </svg>
               {{ range .Params.tags }}
                 <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
               {{ end }}
             </span>
           {{ end }}
-        </div>   
-        <!-- 摘要内容 -->
+        </div>
         <p class="summary">{{ .Summary }}</p>
       </div>
     {{ end }}
-
-    <!-- 分页导航 -->
-    {{ if or .Paginator.HasPrev .Paginator.HasNext }}
+  {{ else }}
+    <p>暂无文章</p>
+  {{ end }}
+  {{ if or .Paginator.HasPrev .Paginator.HasNext }}
     <div class="pagination">
       {{ if .Paginator.HasPrev }}
-        <a href="{{ .Paginator.Prev.URL }}" class="prev">
-          上一页
-        </a>
+        <a href="{{ .Paginator.Prev.URL }}" class="prev">上一页</a>
       {{ end }}
-
       <span class="page-number">{{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
-
       {{ if .Paginator.HasNext }}
-        <a href="{{ .Paginator.Next.URL }}" class="next">
-          下一页
-        </a>
+        <a href="{{ .Paginator.Next.URL }}" class="next">下一页</a>
       {{ end }}
     </div>
-    {{ end }}
-  </div>
+  {{ end }}
+</div>
+
 </div>
 
 <script>

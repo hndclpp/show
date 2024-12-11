@@ -18,8 +18,6 @@
             transform: translateY(0);
         }
 
-
-
         // 标题样式
         h2 {
             margin: var(--spacing-sm) 0;
@@ -39,7 +37,7 @@
         .summary {
             margin-top: var(--spacing-sm);
             color: var(--color-text-muted);
-            font-size: var(--font-size-body);
+            font-size: var(--font-size-post);
         }
     }
 }
@@ -48,13 +46,12 @@
 @include mobile {
     .post-container {
         .post {
-            padding: var(--spacing-mobile);
-            font-size: var(--font-size-mobile);
-
-            // 移动端优化：增加空隙，适配小屏幕
-            .meta-info {
-                gap: var(--spacing-mobile);
-                font-size: var(--font-size-small);
+            box-shadow: none; // 移除盒子阴影
+            border-bottom: 1px dashed var(--color-border);
+            font-size: var(--font-size-post);
+            background:none;
+            h2 {
+                font-size:var(--font-size-mobile-heading);
             }
         }
     }
