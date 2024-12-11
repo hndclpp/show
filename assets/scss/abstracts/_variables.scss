@@ -2,20 +2,20 @@
 :root {
     // 字体
     --font-main: "LXGW WenKai Screen", Arial, sans-serif;
-    --font-size-base: clamp(1rem, 1.25vw, 1.125rem);
-    --font-size-mobile: clamp(1rem, 1.25vw, 1rem);
-    --font-size-heading: clamp(1rem, 1.25vw, 1.125rem);
-    --font-size-mobile-heading: clamp(0.9rem, 1.25vw, 1rem);
-    --font-size-post: clamp(0.8rem, 1.25vw, 0.9rem);
-    --font-size-h1: clamp(1.375rem, 1.25vw, 1.5rem);
-    --font-size-h2: clamp(1.25rem, 1.25vw, 1.375rem);
-    --font-size-h3: clamp(1.125rem, 1.25vw, 1.25rem);
+    --font-size-base: clamp(1rem, 1.5vw, 1.125rem);
+    --font-size-mobile: clamp(1rem, 1.5vw, 1.125rem);
+    --font-size-heading: clamp(1.125rem, 1.5vw, 1.25rem);
+    --font-size-mobile-heading: clamp(1rem, 1.5vw, 1rem);
+    --font-size-post: clamp(0.9rem, 1.5vw, 1rem);
+    --font-size-h1: clamp(1.375rem, 1.5vw, 1.5rem);
+    --font-size-h2: clamp(1.25rem, 1.5vw, 1.375rem);
+    --font-size-h3: clamp(1.125rem, 1.5vw, 1.25rem);
     --font-size-code: clamp(0.9rem, 1vw, 0.9rem);
-    --font-size-meta: clamp(0.75rem, 1.25vw, 0.9rem);
-    --font-size-menu: clamp(1.25rem, 1.25vw, 2rem);
-    --font-size-gallery: clamp(0.5rem, 1.25vw, 0.8rem);
-    --font-size-close:clamp(1rem, 1.25vw, 1.5rem);
-    --icon--size: clamp(1rem, 1.25vw, 1.125rem);
+    --font-size-meta: clamp(0.75rem, 1.5vw, 0.9rem);
+    --font-size-menu: clamp(1.25rem, 1.5vw, 2rem);
+    --font-size-gallery: clamp(0.5rem, 1.5vw, 0.8rem);
+    --font-size-close:clamp(1rem, 1.5vw, 1.5rem);
+    --icon--size: clamp(1rem, 1.5vw, 1.125rem);
     
     // 颜色
     --color-primary-rgb: 0, 123, 255;
