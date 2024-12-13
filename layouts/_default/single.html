@@ -10,7 +10,7 @@
         <h2>{{ .Title }}</h2>
 
         <!-- 文章元数据 -->
-        <div class="meta-info">           
+        <div class="meta-info">
             <span class="meta-item">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-date-single"></use>
@@ -21,22 +21,19 @@
             </span>
 
             {{ if .Params.location }}
-                <span class="meta-item">
+            <span class="meta-item">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-location-single"></use>
                 </svg>
-                    {{ .Params.location }}
-                </span>
+                {{ .Params.location }}
+            </span>
             {{ end }}
-
 
             {{ if .Params.tags }}
             <span class="meta-item">
-
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-tags-single"></use>
                 </svg>
-
                 {{ range .Params.tags }}
                 <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
                 {{ end }}
@@ -50,4 +47,70 @@
         </div>
     </article>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 创建 IntersectionObserver
+    const createObserver = (callback, options = { threshold: 0.1 }) => {
+        return new IntersectionObserver(callback, options);
+    };
+
+    // 文字加载动画逻辑
+    const textElements = document.querySelectorAll('.single-content p');
+    const textObserver = createObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                entry.target.style.transition = `opacity 0.3s ease ${(index * 0.1)}s, transform 0.3s ease ${(index * 0.1)}s`;
+
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    textElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(15px)';
+        textObserver.observe(element);
+    });
+
+    // 返回顶部按钮逻辑
+    const backToTopButton = document.createElement('button');
+    backToTopButton.className = 'back-to-top';
+    backToTopButton.innerHTML = '↑';
+    document.body.appendChild(backToTopButton);
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(() => {
+                backToTopButton.classList.toggle('visible', window.scrollY > 300);
+                isScrolling = false;
+            });
+        }
+    });
+
+
+    // 显示文章内容
+    const skeletonContainer = document.querySelector('.skeleton-container');
+    const singleContent = document.querySelector('.single-content');
+    if (skeletonContainer && singleContent) {
+        const showContent = () => {
+            skeletonContainer.style.display = 'none';
+            singleContent.style.display = 'block';
+        };
+        if (document.readyState === 'complete') {
+            showContent();
+        } else {
+            window.addEventListener('load', showContent);
+        }
+    }
+});
+</script>
 {{ end }}

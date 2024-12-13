@@ -1,83 +1,103 @@
 {{ define "main" }}
 <div class="post-container">
   <!-- 骨架屏容器 -->
-<div class="skeleton-container">
-  {{ $count := len .Paginator.Pages }}
-  {{ range (seq $count) }}
-    {{ partial "skeleton-post.html" . }}
-  {{ end }}
-</div>
+  <div class="skeleton-container">
+    {{ $count := len .Paginator.Pages }}
+    {{ range (seq $count) }}
+      {{ partial "skeleton-post.html" . }}
+    {{ end }}
+  </div>
 
-<!-- 实际内容容器 -->
-<div class="posts-container" style="display: none;">
-  {{ $posts := where .Paginator.Pages "Type" "post" }}
-  {{ if $posts }}
-    {{ range $posts }}
-      <div class="post">
-        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-        <div class="meta-info">
-          <span class="meta-item meta-date">
-          <svg class="icon" aria-hidden="true">
-              {{ $weatherIcons := dict "晴" "sunny" "多云" "cloudy" "阴" "overcast" "雨" "rain" "雷" "thunder" "雪" "snow" "雨夹雪" "rain-and-snow" "冰雹" "hail" "风" "windy" "雾霾" "fog" "沙尘" "sandstorm" "夜晚" "night" "夜晚有雨" "rain-at-night" "夜晚有雪" "snow-at-night"}}
-              {{ $weatherKey := .Params.weather }}
-              {{ $icon := index $weatherIcons $weatherKey | default "date" }}
-              <use xlink:href="#icon-{{ $icon }}"></use>
-          </svg>
-            <a href="/timeline" class="meta-link">{{ .Date.Format "2006-01-02" }}</a>
-          </span>
-          {{ if .Params.location }}
-            <span class="meta-item meta-location">
+  <!-- 实际内容容器 -->
+  <div class="posts-container" style="display: none;">
+    {{ $posts := where .Paginator.Pages "Type" "post" }}
+    {{ if $posts }}
+      {{ range $posts }}
+        <div class="post">
+          <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <div class="meta-info">
+            <span class="meta-item meta-date">
               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-location"></use>
+                {{ $weatherIcons := dict "晴" "sunny" "多云" "cloudy" "阴" "overcast" "雨" "rain" "雷" "thunder" "雪" "snow" "雨夹雪" "rain-and-snow" "冰雹" "hail" "风" "windy" "雾霾" "fog" "沙尘" "sandstorm" "夜晚" "night" "夜晚有雨" "rain-at-night" "夜晚有雪" "snow-at-night"}}
+                {{ $weatherKey := .Params.weather }}
+                {{ $icon := index $weatherIcons $weatherKey | default "date" }}
+                <use xlink:href="#icon-{{ $icon }}"></use>
               </svg>
-              {{ .Params.location }}
+              <a href="/timeline" class="meta-link">{{ .Date.Format "2006-01-02" }}</a>
             </span>
-          {{ end }}
-          {{ if .Params.tags }}
-            <span class="meta-item meta-tags">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-tags"></use>
-              </svg>
-              {{ range .Params.tags }}
-                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
-              {{ end }}
-            </span>
-          {{ end }}
+            {{ if .Params.location }}
+              <span class="meta-item meta-location">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-location"></use>
+                </svg>
+                {{ .Params.location }}
+              </span>
+            {{ end }}
+            {{ if .Params.tags }}
+              <span class="meta-item meta-tags">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tags"></use>
+                </svg>
+                {{ range .Params.tags }}
+                  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+                {{ end }}
+              </span>
+            {{ end }}
+          </div>
+          <p class="summary">{{ .Summary }}</p>
         </div>
-        <p class="summary">{{ .Summary }}</p>
+      {{ end }}
+    {{ else }}
+      <p class="tip">暂无文章</p>
+    {{ end }}
+    {{ if or .Paginator.HasPrev .Paginator.HasNext }}
+      <div class="pagination">
+        {{ if .Paginator.HasPrev }}
+          <a href="{{ .Paginator.Prev.URL }}" class="prev">上一页</a>
+        {{ end }}
+        <span class="page-number">{{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
+        {{ if .Paginator.HasNext }}
+          <a href="{{ .Paginator.Next.URL }}" class="next">下一页</a>
+        {{ end }}
       </div>
     {{ end }}
-  {{ else }}
-    <p class="tip">暂无文章</p>
-  {{ end }}
-  {{ if or .Paginator.HasPrev .Paginator.HasNext }}
-    <div class="pagination">
-      {{ if .Paginator.HasPrev }}
-        <a href="{{ .Paginator.Prev.URL }}" class="prev">上一页</a>
-      {{ end }}
-      <span class="page-number">{{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
-      {{ if .Paginator.HasNext }}
-        <a href="{{ .Paginator.Next.URL }}" class="next">下一页</a>
-      {{ end }}
-    </div>
-  {{ end }}
-</div>
-
+  </div>
 </div>
 
 <script>
-// 等待所有资源加载完成
-document.addEventListener('DOMContentLoaded', function() {
-    // 给一个短暂的延迟以确保平滑过渡
-    setTimeout(function() {
-        const skeletonContainer = document.querySelector('.skeleton-container');
-        const postsContainer = document.querySelector('.posts-container');
-        
-        if (skeletonContainer && postsContainer) {
-            skeletonContainer.style.display = 'none';
-            postsContainer.style.display = 'block';
+  document.addEventListener('DOMContentLoaded', () => {
+    // 初始化 IntersectionObserver 配置
+    const createObserver = (callback, options) => new IntersectionObserver(callback, options);
+
+    // 文章列表动画
+    const postElements = document.querySelectorAll(".post");
+    const postObserver = createObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
         }
-    }, 300); // 300ms 延迟
-});
+      });
+    }, {
+      rootMargin: "50px",
+      threshold: 0.1
+    });
+
+    postElements.forEach((post, index) => {
+      post.style.setProperty("--delay", `${index * 0.2}s`);
+      postObserver.observe(post);
+    });
+
+    // 等待所有资源加载完成，平滑过渡
+    const skeletonContainer = document.querySelector('.skeleton-container');
+    const postsContainer = document.querySelector('.posts-container');
+
+    if (skeletonContainer && postsContainer) {
+      setTimeout(() => {
+        skeletonContainer.style.display = 'none';
+        postsContainer.style.display = 'block';
+      }, 300); // 延迟 300ms
+    }
+  });
 </script>
 {{ end }}

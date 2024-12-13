@@ -14,4 +14,26 @@
       {{ end }}
     </ul>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 获取所有时间轴项目
+      const timelineItems = document.querySelectorAll('.timeline-item');
+
+      // 设置批量动画函数
+      const animateTimelineBatch = (startIndex, batchSize) => {
+        for (let i = startIndex; i < startIndex + batchSize && i < timelineItems.length; i++) {
+          timelineItems[i].style.animationDelay = `${(i + 1) * 0.1}s`;
+          timelineItems[i].classList.add('animated'); // 添加动画类
+        }
+
+        if (startIndex + batchSize < timelineItems.length) {
+          requestAnimationFrame(() => animateTimelineBatch(startIndex + batchSize, batchSize));
+        }
+      };
+
+      // 开始批量处理动画，指定初始索引和批量大小
+      animateTimelineBatch(0, 10);
+    });
+  </script>
 {{ end }}

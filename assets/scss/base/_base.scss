@@ -7,6 +7,9 @@ html, body {
     font-family: var(--font-main);
     font-size: var(--font-size-base);
     @extend %scrollbar; // 确保 %scrollbar 已定义
+    user-select: none; /* 禁止选中 */
+    outline: none;     /* 去掉点击后的边框 */
+    cursor: default;
 }
 
 

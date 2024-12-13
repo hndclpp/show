@@ -1,0 +1,23 @@
+.lottie-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;  /* 垂直居中 */
+        align-items: center;      /* 水平居中 */
+        height: 100vh;            /* 使容器占满整个视口 */
+        text-align: center;       /* 确保文本居中 */
+        padding: 20px;
+    }
+
+    .return-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .return-link:hover {
+        background-color: #0056b3;
+    }
