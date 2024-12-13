@@ -13,6 +13,22 @@
       margin-bottom: 0;
     }
   }
+ 
+  .footnote-ref,.footnote-backref {
+    color: var(--color-primary);
+  }
+  .footnotes {
+    color: var(--color-secondary);
+    font-size: var(--font-size-footnotes);
+
+    p {
+      font-size: var(--font-size-footnotes);
+    }
+
+    hr {
+      display: none;
+    }
+  }
 
   h3, h4, h5, h6 {
     color: var(--color-text);
