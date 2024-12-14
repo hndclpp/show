@@ -1,0 +1,98 @@
+/* 通用样式 */
+.section-title {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.hero {
+  background: var(--color-bg);
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color:var(--color-text);
+}
+
+.hero-content p {
+  font-size: 1.2em;
+  color: var(--color-text);
+}
+
+/* 最近文章网格布局 */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin: 1.25rem 0;
+}
+
+.post-card {
+  background: var(--color-card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  box-shadow: var(--box-shadow);
+  transition: all var(--transition-normal);
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow);
+}
+
+.post-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+  color: var(--color-text);
+}
+
+.post-card p {
+  font-size: 0.9em;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.post-card small {
+  font-size: 0.8em;
+  color: var(--color-text);
+}
+
+/* 说说网格布局 */
+.short-post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.short-post-card {
+  background: var(--color-card-bg);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  box-shadow: var(--box-shadow);
+  text-align: left;
+}
+
+.short-post-card:hover {
+  box-shadow: var(--box-shadow);
+}
+
+.short-post-card p {
+  margin: 0 0 10px;
+  font-size: 0.95em;
+  color: var(--color-text);
+}
+
+.short-post-card p img{
+  border-radius: var(--border-radius);
+  margin: var(--spacing-xs) 0;
+}
+
+.short-post-card small {
+  font-size: 0.8em;
+  color: var(--color-text);
+}

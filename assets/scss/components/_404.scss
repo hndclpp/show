@@ -9,9 +9,9 @@
 
     .return-link {
         display: inline-block;
-        margin-top: 20px;
+        margin-top: var(--spacing-lg);
         padding: 10px 20px;
-        background-color: #007bff;
+        background-color: var(--color-primary);
         color: white;
         text-decoration: none;
         border-radius: var(--border-radius);

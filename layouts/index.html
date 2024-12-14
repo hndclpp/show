@@ -1,0 +1,33 @@
+{{ define "main" }}
+<section id="hero" class="hero">
+  <div class="hero-content">
+    <h1>欢迎来到我的博客</h1>
+    <p>记录生活的点滴和想法。</p>
+  </div>
+</section>
+
+<section id="recent-posts" class="recent-posts">
+  <h2 class="section-title">最近文章</h2>
+  <div class="post-grid">
+    {{ range first 4 (where .Site.RegularPages "Type" "post") }}
+    <div class="post-card">
+      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+      <!-- <p>{{ .Summary }}</p> -->
+      <small>{{ .Date.Format "2006-01-02" }}</small>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section id="short-posts" class="short-posts">
+  <h2 class="section-title">说说</h2>
+  <div class="short-post-grid">
+    {{ range first 4 (where .Site.RegularPages "Type" "shuoshuo") }}
+    <div class="short-post-card">
+      <p>{{ .Content }}</p>
+      <small>{{ .Date.Format "2006-01-02" }}</small>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

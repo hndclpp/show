@@ -10,7 +10,9 @@
         <h2>{{ .Title }}</h2>
 
         <!-- 文章元数据 -->
-        {{ partial "meta-info.html" . }}
+        {{ if ne .Type "shuoshuo" }}
+            {{ partial "meta-info.html" . }}
+        {{ end }}
 
         <!-- 文章内容正文 -->
         <div class="content">
