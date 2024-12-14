@@ -1,4 +1,4 @@
-// 暗色主题
+// 原有 SCSS 保留
 [data-theme="dark"] {
     --color-bg-rgb: 26, 26, 26;
     --color-primary-rgb: 77, 171, 247;
@@ -13,7 +13,7 @@
     --mask-bg: #000;
 }
 
-// 主题切换按钮
+// 主题切换按钮保持不变
 .theme-toggle {
     background: none;
     border: none;
@@ -44,7 +44,7 @@
     }
 }
 
-// 暗色模式下的图标显示状态
+// 暗色模式下按钮图标
 [data-theme="dark"] {
     .theme-toggle {
         .theme-toggle-dark {
@@ -55,16 +55,3 @@
         }
     }
 }
-
-// 移动端适配
-@include mobile {
-    .theme-toggle {
-        padding: 0.4rem;
-        margin-right: 0.75rem;
-        
-        svg {
-            width: 18px;
-            height: 18px;
-        }
-    }
-} 

@@ -10,36 +10,7 @@
         <h2>{{ .Title }}</h2>
 
         <!-- 文章元数据 -->
-        <div class="meta-info">
-            <span class="meta-item">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-date-single"></use>
-                </svg>
-                <a href="/timeline" class="meta-link">
-                    {{ .Date.Format "2006-01-02" }}
-                </a>
-            </span>
-
-            {{ if .Params.location }}
-            <span class="meta-item">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-location-single"></use>
-                </svg>
-                {{ .Params.location }}
-            </span>
-            {{ end }}
-
-            {{ if .Params.tags }}
-            <span class="meta-item">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-tags-single"></use>
-                </svg>
-                {{ range .Params.tags }}
-                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
-                {{ end }}
-            </span>
-            {{ end }}
-        </div>
+        {{ partial "meta-info.html" . }}
 
         <!-- 文章内容正文 -->
         <div class="content">

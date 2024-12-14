@@ -28,6 +28,11 @@
     align-items: center;
     margin-right: var(--spacing-sm);
 }
+.meta-tags {
+    a {
+        margin-right: var(--spacing-xs);
+    }
+}
 
 
 // 移动端适配

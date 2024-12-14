@@ -1,0 +1,26 @@
+<div class="meta-info">
+    <span class="meta-item meta-date">
+        <svg class="icon" aria-hidden="true">
+            {{ $weatherIcons := dict "晴" "sunny" "多云" "cloudy" "阴" "overcast" "雨" "rain" "雷" "thunder" "雪" "snow" "雨夹雪" "rain-and-snow" "冰雹" "hail" "风" "windy" "雾霾" "fog" "沙尘" "sandstorm" "夜晚" "night" "夜晚有雨" "rain-at-night" "夜晚有雪" "snow-at-night"}}
+            {{ $weatherKey := .Params.weather }}
+            {{ $icon := index $weatherIcons $weatherKey | default "date" }}
+            <use xlink:href="#icon-{{ $icon }}"></use>
+        </svg>
+        <a href="/timeline" class="meta-link">{{ .Date.Format "2006-01-02" }}</a>
+    </span>
+    {{ if .Params.location }}
+        <span class="meta-item meta-location">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-location"></use>
+            </svg>
+            {{ .Params.location }}
+        </span>
+    {{ end }}
+    {{ if .Params.tags }}
+        <span class="meta-item meta-tags">
+            {{ range .Params.tags }}
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">#{{ . }} </a>
+            {{ end }}
+        </span>
+    {{ end }}
+</div>

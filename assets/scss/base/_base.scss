@@ -10,6 +10,7 @@ html, body {
     user-select: none; /* 禁止选中 */
     outline: none;     /* 去掉点击后的边框 */
     cursor: default;
+    z-index: 9999;
 }
 
 

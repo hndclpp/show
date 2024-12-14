@@ -63,13 +63,6 @@
     }
 }
 
-// 图片淡入动画
-@keyframes imgFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 // 文章页面骨架屏样式
 .skeleton-single {
