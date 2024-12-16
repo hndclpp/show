@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { name: 'title', weight: 0.7 },
                     { name: 'content', weight: 0.3 }
                 ],
-                threshold: 0.3,
+                threshold: 0.2,
                 includeScore: true,
                 minMatchCharLength: 2
             };

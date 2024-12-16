@@ -27,7 +27,7 @@
       (resources.Get "js/theme.js")
       (resources.Get "js/menu.js")
     }}
-    {{ $combined := $js | resources.Concat "js/main.js" | minify | fingerprint }}
+    {{ $combined := $js | resources.Concat "js/main.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{ $combined.RelPermalink }}" integrity="{{ $combined.Data.Integrity }}"></script>
   </body>
 </html>
