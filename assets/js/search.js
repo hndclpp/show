@@ -23,11 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Invalid search index data');
             }
 
-            console.log('Search index loaded:', data);
+            // console.log('Search index loaded:', data);
 
             const options = {
                 keys: [
                     { name: 'title', weight: 0.7 },
+                    { name: 'summary', weight: 0.3 }
                     { name: 'content', weight: 0.3 }
                 ],
                 threshold: 0.2,

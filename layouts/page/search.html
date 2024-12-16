@@ -36,10 +36,9 @@
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
 <!-- 搜索逻辑的脚本 -->
-{{ $js := slice 
-    (resources.Get "js/search.js")
-}}
+{{ $js := slice (resources.Get "js/search.js") }}
 {{ $combined := $js | resources.Concat "js/search.bundle.js" | minify | fingerprint }}
 <script src="{{ $combined.RelPermalink }}" integrity="{{ $combined.Data.Integrity }}"></script>
-{{ end }}
 
+
+{{ end }}
