@@ -13,6 +13,9 @@ paginate = 5  # 设置每页显示 5 篇文章
   description = "使用show主题搭建的静态网页"  # 网站描述信息
   keywords = "Hugo, 静态网站, 博客, 示例"        # 网站关键词
 
+[permalinks]
+  topic = "/topics/:title/"
+
 [assets]
   postCSS = true  # 启用 PostCSS 支持，包括 SCSS 处理
 

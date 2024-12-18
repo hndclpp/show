@@ -56,6 +56,9 @@
             h2 {
                 font-size:var(--font-size-mobile-heading);
             }
+            &:last-child {
+                border-bottom: none; // 去除最后一个 post 的下边框
+            }
         }
     }
 }

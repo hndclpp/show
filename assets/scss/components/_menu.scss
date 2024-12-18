@@ -146,6 +146,9 @@
     &.active li:nth-child(5) {
         transition-delay: 0.3s;
     }
+    &.active li:nth-child(6) {
+        transition-delay: 0.35s;
+    }
 
     &.closing li {
         opacity: 0;

@@ -1,98 +1,127 @@
-/* 通用样式 */
-.section-title {
-  font-size: 1.5em;
-  margin-bottom: 20px;
-  color: var(--color-text);
-  text-align: center;
+/* info 区域整体样式 */
+.info {
+  display: flex;
+  flex-direction: column; /* 垂直排列 */
+  align-items: center; /* 水平居中 */
+  text-align: center; /* 文字居中 */
+  margin-bottom: var(--spacing-sm); /* 下边距 */
 }
 
-.hero {
-  background: var(--color-bg);
-  padding: 50px 20px;
-  text-align: center;
+/* info-content 区域（头像和标题） */
+.info-content {
+  display: flex;
+  flex-direction: column; /* 垂直排列 */
+  align-items: center; /* 水平居中 */
+  margin-bottom: var(--spacing-sm); /* 与 statistics 间距 */
 }
 
-.hero-content h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-  color:var(--color-text);
+.info-content .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: var(--spacing-sm);
 }
 
-.hero-content p {
-  font-size: 1.2em;
-  color: var(--color-text);
+/* 统计信息样式 */
+.statistics {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  gap: var(--spacing-sm); /* 每个统计项目之间的间距 */
+  margin: var(--spacing-sm);
 }
 
-/* 最近文章网格布局 */
-.post-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-md);
-  margin: 1.25rem 0;
+.statistics .count {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: bold;
+  transition: color var(--transition-normal);
 }
 
-.post-card {
-  background: var(--color-card-bg);
-  border-radius: var(--border-radius);
-  padding: 1.25rem;
-  box-shadow: var(--box-shadow);
-  transition: all var(--transition-normal);
+.statistics .count:hover {
+  color: #007bff; /* 悬停时的颜色 */
+  cursor: pointer;
 }
 
-.post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow);
-}
 
-.post-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.2em;
-  color: var(--color-text);
-}
-
-.post-card p {
-  font-size: 0.9em;
-  color: var(--color-text);
-  margin-bottom: 10px;
-}
-
-.post-card small {
-  font-size: 0.8em;
-  color: var(--color-text);
-}
-
-/* 说说网格布局 */
+/* 主要容器 */
 .short-post-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin: 20px 0;
+  column-count: 2; /* 设置列数 */
+  column-gap: var(--spacing-md); /* 设置列间距 */
+  margin: var(--spacing-md) auto;
+  padding: 0 var(--spacing-sm);
 }
 
+/* 单个卡片样式 */
 .short-post-card {
+  break-inside: avoid; /* 防止卡片被拆分 */
+  margin-bottom: var(--spacing-sm);
   background: var(--color-card-bg);
   border-radius: var(--border-radius);
-  padding: 15px;
+  padding: var(--spacing-md);
   box-shadow: var(--box-shadow);
-  text-align: left;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
+/* 卡片悬停效果 */
 .short-post-card:hover {
-  box-shadow: var(--box-shadow);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* 提升阴影 */
 }
 
-.short-post-card p {
-  margin: 0 0 10px;
-  font-size: 0.95em;
-  color: var(--color-text);
-}
-
-.short-post-card p img{
+/* 调整每个卡片的样式 */
+.short-post-card img {
+  width: 100%;
+  height: auto;
   border-radius: var(--border-radius);
   margin: var(--spacing-xs) 0;
 }
 
-.short-post-card small {
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-header .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-meta .username {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.post-meta .post-time {
   font-size: 0.8em;
+  color: #aaa;
+}
+
+.short-post-card p {
+  margin: 0;
   color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* 话题标签样式 */
+.post-topic {
+  color: var(--color-topic);
+/*  margin: 0 var(--spacing-xs);*/
+  text-decoration: none;
+}
+
+
+/* 响应式媒体查询 */
+@media screen and (max-width: 1024px) {
+  .short-post-grid {
+    column-count: 2; /* 平板或较小屏幕，显示 2 列 */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .short-post-grid {
+    column-count: 1; /* 小屏幕设备，显示 1 列 */
+  }
 }

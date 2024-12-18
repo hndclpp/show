@@ -2,7 +2,7 @@
 :root {
     // 字体
     --font-main: "LXGW WenKai Screen", Arial, sans-serif;
-    --font-size-base: clamp(1rem, 1.5vw, 1.125rem);
+    --font-size-base: clamp(1rem, 1.5vw, 1.1rem);
     --font-size-mobile: clamp(1rem, 1.5vw, 1.125rem);
     --font-size-heading: clamp(1.125rem, 1.5vw, 1.25rem);
     --font-size-mobile-heading: clamp(1rem, 1.5vw, 1rem);
@@ -19,8 +19,7 @@
     --icon--size: clamp(1rem, 1.5vw, 1.125rem);
     
     // 颜色
-    --color-primary-rgb: 0, 123, 255;
-    --color-primary: rgb(var(--color-primary-rgb));
+    --color-primary: #007bff;
     --color-secondary: #999;
     --color-posts-mobile: #7d7d7d;
     --color-text: #333333;
@@ -31,14 +30,15 @@
     --color-tag-bg: #f4f4f4;
     --color-quote-bg: #007bff;
     --color-code-bg: #000000;
+    --color-topic: #2a8d5a;
     --mask-bg: #fff;
     
     // 间距
     --line-height: 1.9;
-    --space-icon: 0.125rem;
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: clamp(0.5rem, 1.25vw, 1rem);
+    --space-icon: 0.25rem;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.25rem;
     --spacing-lg: 1.5rem;
     --border-radius: 0.25rem;
     

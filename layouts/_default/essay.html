@@ -1,18 +1,3 @@
-{{ define "main" }}
-<!-- info 部分 -->
-<section id="info" class="info">
-  <div class="info-content">
-    <!-- 头像 -->
-    <img class="avatar" src="{{ "avatar.jpg" | relURL }}" alt="Avatar">
-    <!-- 名称 -->
-    <h1>{{ .Site.Params.name }}</h1>
-    <!-- 个性签名 -->
-    <p class="signature">{{ .Site.Params.signature }}</p>
-  </div>
-  {{ partial "statistics.html" . }}
-
-</section>
-
 <!-- 动态部分 -->
 <section id="short-posts" class="short-posts">
   <div class="short-post-grid">
@@ -36,4 +21,3 @@
     {{ end }}
   </div>
 </section>
-{{ end }}

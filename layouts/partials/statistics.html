@@ -1,0 +1,45 @@
+<div class="statistics">
+  {{ $shuoshuoCount := len (where .Site.RegularPages "Type" "shuoshuo") }}
+  {{ $postCount := len (where .Site.RegularPages "Type" "post") }}
+
+  <!-- 获取当前页面中的 images 数组 -->
+  {{ $galleryPage := .Site.GetPage "page" "gallery" }}
+  {{ $photoCount := 0 }}
+  {{ if $galleryPage }}
+    {{ $photoCount = len $galleryPage.Params.images }}
+  {{ end }}
+
+  <!-- 动态统计 -->
+  <span class="count">
+    动态
+    {{ if gt $shuoshuoCount 0 }}
+      ({{ $shuoshuoCount }})
+    {{ else }}
+      (0)
+    {{ end }}
+  </span>
+
+  <!-- 文章统计 -->
+  <a href="{{ .Site.BaseURL }}posts">
+    <span class="count">
+      文章
+      {{ if gt $postCount 0 }}
+        ({{ $postCount }})
+      {{ else }}
+        (0)
+      {{ end }}
+    </span>
+  </a>
+
+  <!-- 图册统计 -->
+  <a href="{{ .Site.BaseURL }}gallery">
+    <span class="count">
+      图册
+      {{ if gt $photoCount 0 }}
+        ({{ $photoCount }})
+      {{ else }}
+        (0)
+      {{ end }}
+    </span>
+  </a>
+</div>

@@ -5,7 +5,7 @@
   }
 
   p {
-    margin-bottom: 1.25em;
+    margin: 0.6em 0;
     line-height: var(--line-height);
     font-size: var(--font-size-base);
     
@@ -75,6 +75,7 @@
     }
   }
 
+   //引用样式
   blockquote {
     margin: 1em 0;
     padding: 1em 1.5em;
