@@ -10,6 +10,11 @@
   color: var(--color-text);
 }
 
+.topic-title {
+  text-align: center;
+  color: var(--color-topic); 
+} 
+
 .topics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

@@ -7,6 +7,7 @@
 @import "base/reset";
 @import "base/base"; 
 @import "base/theme";
+@import "base/theme-transition";
 
 // 3. 布局层（页面结构）
 @import "layout/container";
@@ -39,3 +40,4 @@
 // 8. 其他（最后加载）
 @import "components/note";
 @import "components/modal";
+@import "components/statistics";

@@ -19,19 +19,20 @@
     --icon--size: clamp(1rem, 1.5vw, 1.125rem);
     
     // 颜色
-    --color-primary: #007bff;
-    --color-secondary: #999;
-    --color-posts-mobile: #7d7d7d;
-    --color-text: #333333;
-    --color-bg-rgb: 255, 255, 255;
+    --color-primary: #00a862;    // 主题绿色
+    --color-primary-rgb: 64, 158, 255; 
+    --color-secondary: #666666;  // 更深的次要文本色
+    --color-posts-mobile: #666666;  // 移动端文本色
+    --color-text: #333333;      // 主文本色，保持黑色系
+    --color-bg-rgb: 255, 255, 255;  // 纯白背景
     --color-bg: rgb(var(--color-bg-rgb));
-    --color-border: #dddddd;
-    --color-card-bg: #ffffff;
-    --color-tag-bg: #f4f4f4;
-    --color-quote-bg: #007bff;
-    --color-code-bg: #000000;
-    --color-topic: #2a8d5a;
-    --mask-bg: #fff;
+    --color-border: #f0f0f0;    // 更浅的边框色
+    --color-card-bg: #ffffff;    // 纯白卡片背景
+    --color-tag-bg: #f8f8f8;    // 非常浅的标签背景
+    --color-quote-bg: #00a862;   // 引用背景使用主题色
+    --color-code-bg: #f8f8f8;   // 代码背景改为浅灰
+    --color-topic: #00a862;     // 话题标签使用主题色
+    --mask-bg: #ffffff;         // 纯白遮罩
     
     // 间距
     --line-height: 1.9;
@@ -46,7 +47,7 @@
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
-    --theme-duration: 0.6s;
+    --theme-duration: 0.85s;
     --theme-timing: cubic-bezier(0.4, 0, 0.2, 1);
     
     // 阴影

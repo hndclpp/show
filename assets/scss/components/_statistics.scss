@@ -1,0 +1,113 @@
+.categories-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: var(--spacing-md);
+
+    // 章节标题
+    .section-title {
+        text-align: center;
+        margin: var(--spacing-lg) 0;
+        color: var(--color-text);
+        font-size: var(--font-size-h1);
+    }
+
+    // 话题部分
+    .topics-section {
+        margin-bottom: var(--spacing-lg);
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .topic-card {
+            background: var(--color-card-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            border: 1px solid var(--color-border);
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--box-shadow);
+            }
+        }
+
+        .topic-name {
+            margin: 0;
+            color: var(--color-topic);
+            font-size: var(--font-size-h3);
+        }
+
+        .topic-meta {
+            margin-top: var(--spacing-sm);
+            color: var(--color-secondary);
+            font-size: var(--font-size-meta);
+        }
+    }
+
+    // 标签部分
+    .tags-section {
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            justify-content: center;
+        }
+
+        .tag-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text);
+            text-decoration: none;
+            transition: all var(--transition-normal);
+
+            &:hover {
+                background: var(--color-primary);
+                color: white;
+                border-color: var(--color-primary);
+                transform: translateY(-2px);
+            }
+        }
+
+        .tag-count {
+            background: var(--color-tag-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            font-size: var(--font-size-meta);
+        }
+    }
+}
+
+// 移动端适配
+@include mobile {
+    .categories-container {
+        padding: var(--spacing-mobile);
+
+        .section-title {
+            margin: var(--spacing-md) 0;
+            font-size: var(--font-size-h2);
+        }
+
+        .topics-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-sm);
+        }
+
+        .topic-card {
+            padding: var(--spacing-sm);
+        }
+
+        .tag-item {
+            padding: 0.4rem 0.8rem;
+            font-size: var(--font-size-small);
+        }
+    }
+} 

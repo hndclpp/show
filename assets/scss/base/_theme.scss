@@ -1,58 +1,44 @@
-// 原有 SCSS 保留
 [data-theme="dark"] {
-    --color-bg-rgb: 26, 26, 26;
-    --color-primary-rgb: 77, 171, 247;
+    // 暗色模式颜色
+    --color-primary: #00b76c;    // 暗色模式下的绿色，稍亮
+    --color-secondary: #999999;  // 暗色模式下的次要文本
+    --color-posts-mobile: #999999;
+    --color-text: #ffffff;      // 暗色模式下用白色文本
+    --color-bg-rgb: 18, 18, 18; // 深色背景
     --color-bg: rgb(var(--color-bg-rgb));
-    --color-text: #e4e6eb;
-    --color-border: #333333;
-    --color-primary: rgb(var(--color-primary-rgb));
-    --color-secondary: #909399;
-    --color-tag-bg: #2d2d2d;
-    --color-card-bg: #242424;
-    --color-posts-mobile: #6b6b6b;
-    --mask-bg: #000;
-    --color-topic: #36b975;
+    --color-border: #2a2a2a;    // 暗色边框
+    --color-card-bg: #1e1e1e;   // 暗色卡片背景
+    --color-tag-bg: #2a2a2a;    // 暗色标签背景
+    --color-quote-bg: #00b76c;  // 暗色引用背景
+    --color-code-bg: #2a2a2a;   // 暗色代码背景
+    --color-topic: #00b76c;     // 暗色话题标签
+    --mask-bg: #181818;         // 暗色遮罩
 }
 
-// 主题切换按钮保持不变
+// 主题切换相关
 .theme-toggle {
     background: none;
     border: none;
-    padding: 0.5rem;
+    padding: 0;
     cursor: pointer;
-    color: var(--color-text);
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1rem;
-    
-    svg {
-        width: 1.25rem;
-        height: 1.25rem;
-        transition: transform var(--transition-normal), color var(--transition-normal);
-        
-        &:hover {
-            transform: rotate(15deg);
-            color: #ded40e;
-        }
-    }
-    
-    .theme-toggle-dark {
-        display: none;
-    }
-    .theme-toggle-light {
-        display: block;
-    }
 }
 
-// 暗色模式下按钮图标
+// 主题图标显示控制
+.theme-toggle-dark { display: none; }
+.theme-toggle-light { display: block; }
+
 [data-theme="dark"] {
-    .theme-toggle {
-        .theme-toggle-dark {
-            display: block;
-        }
-        .theme-toggle-light {
-            display: none;
-        }
-    }
+    .theme-toggle-dark { display: block; }
+    .theme-toggle-light { display: none; }
+}
+
+// View Transitions API 相关
+::view-transition-old(*),
+::view-transition-new(*) {
+    animation: none;
 }

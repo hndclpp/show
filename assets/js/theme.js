@@ -1,59 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    async function toggleTheme(event) {
-        if (!document.startViewTransition) {
-            document.documentElement.setAttribute('data-theme', 
-                document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'
-            );
-            return;
+    class ThemeManager {
+        constructor() {
+            // 初始化主题管理器
+            this.themeToggle = document.getElementById('theme-toggle');  // 获取主题切换按钮
+            this.root = document.documentElement;  // 获取根元素
+            this.initialize();  // 执行初始化
         }
 
-        const x = event?.clientX ?? window.innerWidth;
-        const y = event?.clientY ?? 0;
+        initialize() {
+            // 初始化主题设置
+            const savedTheme = localStorage.getItem('theme');  // 获取保存的主题
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;  // 检查系统主题偏好
+            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');  // 确定初始主题
+            this.root.setAttribute('data-theme', initialTheme);  // 设置初始主题
 
-        const endRadius = Math.hypot(
-            Math.max(x, innerWidth - x),
-            Math.max(y, innerHeight - y)
-        );
+            // 绑定点击事件
+            if (this.themeToggle) {
+                this.themeToggle.addEventListener('click', (e) => this.toggle(e));
+            }
+        }
 
-        const transition = document.startViewTransition(() => {
-            const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-
-        try {
-            await transition.ready;
+        toggle(event) {
+            // 计算动画起点（使用点击位置或屏幕中心）
+            const x = event?.clientX ?? innerWidth / 2;
+            const y = event?.clientY ?? innerHeight / 2;
             
-            const clipPath = [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${endRadius}px at ${x}px ${y}px)`
-            ];
-            
-            document.documentElement.animate(
-                {
-                    clipPath: document.documentElement.getAttribute('data-theme') === 'dark' 
-                        ? clipPath 
-                        : [...clipPath].reverse(),
-                },
-                {
-                    duration: 500,
-                    easing: 'ease-in',
-                    pseudoElement: document.documentElement.getAttribute('data-theme') === 'dark'
-                        ? '::view-transition-new(root)'
-                        : '::view-transition-old(root)',
-                }
+            // 计算动画扩散半径（使用勾股定理计算最大覆盖半径）
+            const endRadius = Math.hypot(
+                Math.max(x, innerWidth - x),
+                Math.max(y, innerHeight - y)
             );
-        } catch (e) {
-            console.error('主题切换动画失败:', e);
+
+            // 设置 CSS 变量，用于动画定位和大小
+            this.root.style.setProperty('--x', x + 'px');  // 动画中心点X坐标
+            this.root.style.setProperty('--y', y + 'px');  // 动画中心点Y坐标
+            this.root.style.setProperty('--r', endRadius + 'px');  // 动画最大半径
+
+            // 如果浏览器不支持 View Transitions API，直接切换主题
+            if (!document.startViewTransition) {
+                this.setTheme(this.isDark ? 'light' : 'dark');
+                return;
+            }
+
+            // 使用 View Transitions API 执行主题切换
+            document.startViewTransition(() => {
+                const newTheme = this.isDark ? 'light' : 'dark';  // 确定新主题
+                this.root.setAttribute('data-theme', newTheme);    // 设置新主题
+                localStorage.setItem('theme', newTheme);           // 保存主题设置
+            });
+        }
+
+        // 设置主题的辅助方法
+        setTheme(theme) {
+            this.root.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        // 获取当前是否为暗色主题
+        get isDark() {
+            return this.root.getAttribute('data-theme') === 'dark';
         }
     }
 
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const systemTheme = prefersDarkScheme.matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme || systemTheme);
-
-    themeToggle?.addEventListener('click', toggleTheme);
+    // 创建主题管理器实例
+    new ThemeManager();
 }); 

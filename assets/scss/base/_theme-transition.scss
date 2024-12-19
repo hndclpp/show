@@ -1,0 +1,49 @@
+/* 主题切换动画样式 */
+
+// 控制旧视图的动画行为
+::view-transition-old(*) {
+    animation: none;  // 默认情况下，旧视图不需要动画
+}
+
+// 控制新视图的动画行为
+::view-transition-new(*) {
+    animation: clip 0.5s ease-in;  // 新视图使用圆形扩散动画，持续0.5秒
+}
+
+// 设置旧视图的层级
+::view-transition-old(root) {
+    z-index: 1;  // 较低层级
+}
+
+// 设置新视图的层级
+::view-transition-new(root) {
+    z-index: 9999;  // 较高层级，确保显示在上层
+}
+
+// 暗色模式切换时的特殊处理
+[data-theme="dark"]::view-transition-old(*) {
+    animation: clip 0.5s ease-in reverse;  // 反向播放动画
+}
+
+[data-theme="dark"]::view-transition-new(*) {
+    animation: none;  // 暗色模式下新视图不需要动画
+}
+
+// 暗色模式下调整视图层级
+[data-theme="dark"]::view-transition-old(root) {
+    z-index: 9999;  // 暗色模式下旧视图在上层
+}
+
+[data-theme="dark"]::view-transition-new(root) {
+    z-index: 1;  // 暗色模式下新视图在下层
+}
+
+// 定义圆形扩散动画
+@keyframes clip {
+    from {
+        clip-path: circle(0% at var(--x) var(--y));  // 从点击位置开始，初始半径为0
+    }
+    to {
+        clip-path: circle(var(--r) at var(--x) var(--y));  // 扩散到最大半径
+    }
+}
