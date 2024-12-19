@@ -13,10 +13,14 @@
 
 </section>
 
-<!-- 动态部分 -->
+<!-- 最新动态 -->
 <section id="short-posts" class="short-posts">
+  <div class="section-header">
+    <h3>最新动态</h3>
+    <a href="/shuoshuo/" class="view-more-btn"> more>> </a>
+  </div>
   <div class="short-post-grid">
-    {{ range where .Site.RegularPages "Type" "shuoshuo" }}
+    {{ range first 4 (where .Site.RegularPages "Type" "shuoshuo") }}
     <div class="short-post-card">
       <!-- 头部信息：头像、用户名、时间 -->
       <div class="post-header">
@@ -29,10 +33,57 @@
       <!-- 内容：将 #话题# 替换为可点击链接 -->
       <div class="post-content">
         {{ $content := .Content }}
-        {{ $contentWithLinks := replaceRE "#(\\S+?)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
+
+        <!-- 调试信息 -->
+        <!-- <div style="color: red;"> -->
+          <!-- 话题列表: {{ .Params.topics }} -->
+        <!-- </div>  -->
+
+        <!-- 修改话题链接生成逻辑：不再使用 .Params.topics，而是直接从内容中匹配 -->
+        {{ $contentWithLinks := replaceRE "#([^#]+)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
         {{ $contentWithLinks | safeHTML }}
       </div>
     </div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- 最新文章 -->
+<section id="recent-posts" class="recent-posts">
+  <div class="section-header">
+    <h3>最新文章</h3>
+    <a href="/posts/" class="view-more-btn"> more>> </a>
+  </div>
+  <div class="posts-grid">
+    {{ range first 2 (where .Site.RegularPages "Type" "post") }}
+    <a href="{{ .Permalink }}">
+    <div class="post-card">
+      <h3>{{ .Title }}</h3>
+      <div class="post-meta">
+        <time>{{ .Date.Format "2006-01-02" }}</time>
+      </div>
+      <p class="post-summary">{{ .Summary }}</p>
+    </div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+
+<!-- 最新图片 -->
+<section id="recent-gallery" class="recent-gallery">
+  <div class="section-header">
+    <h3>最新图片</h3>
+    <a href="/gallery/" class="view-more-btn"> more>> </a>
+  </div>
+  <div class="gallery-grid">
+    {{ $galleryPage := .Site.GetPage "/gallery" }}
+    {{ with $galleryPage }}
+      {{ range first 4 .Params.images }}
+      <div class="gallery-item">
+        <img src="{{ .url }}" alt="{{ .title }}" loading="lazy">
+        <div class="gallery-title">{{ .title }}</div>
+      </div>
+      {{ end }}
     {{ end }}
   </div>
 </section>

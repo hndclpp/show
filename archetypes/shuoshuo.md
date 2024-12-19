@@ -1,6 +1,5 @@
 ---
 date: {{ .Date }}
-type: "shuoshuo"  # 动态类型
-topic: ["话题1", "话题2"]  # 可以指定多个话题
+type: "shuoshuo"
+topics: []  # Hugo 会自动从内容中提取话题并添加到这里
 ---
-#话题1# #话题2# 默认的动态内容，删除后写内容

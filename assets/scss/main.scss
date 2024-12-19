@@ -25,6 +25,8 @@
 @import "components/search"; 
 @import "components/tags"; 
 @import "components/timeline"; 
+@import "components/topics";
+@import "components/shuoshuo";
 
 // 6. 功能性组件（按需加载）
 @import "components/404";
@@ -34,5 +36,6 @@
 
 // 7. 装饰性样式
 @import "base/animations";
-// 8. 短代码（最后加载）
+// 8. 其他（最后加载）
 @import "components/note";
+@import "components/modal";

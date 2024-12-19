@@ -4,7 +4,8 @@ title = '丘丘人'                    # 网站名称
 theme = "show"                # 主题
 archetypeDir = "themes/show/archetypes"
 
-paginate = 5  # 设置每页显示 5 篇文章
+[pagination]
+  pagerSize = 5  # 设置每页显示 5 篇文章
 
 [markup.goldmark.renderer]
   unsafe = true
@@ -18,10 +19,14 @@ paginate = 5  # 设置每页显示 5 篇文章
 [assets]
   postCSS = true  # 启用 PostCSS 支持，包括 SCSS 处理
 
-
+[taxonomies]
+  tag = "tags"
+  topic = "topics" # 这个配置是正确的
 
 [build]
   writeStats = false
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
+taxonomy = ["HTML", "RSS"]
+taxonomyTerm = ["HTML", "RSS"]

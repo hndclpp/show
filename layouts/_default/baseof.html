@@ -21,11 +21,13 @@
       {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
+    {{ partial "modal.html" . }}
 
     <!-- 基础功能JS -->
     {{ $js := slice 
       (resources.Get "js/theme.js")
       (resources.Get "js/menu.js")
+      (resources.Get "js/modal.js")
     }}
     {{ $combined := $js | resources.Concat "js/main.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{ $combined.RelPermalink }}" integrity="{{ $combined.Data.Integrity }}"></script>

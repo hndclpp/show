@@ -1,9 +1,12 @@
-<!-- 动态部分 -->
-<section id="short-posts" class="short-posts">
+{{ define "main" }}
+<section class="shuoshuo-list">
+  <div class="section-header">
+  </div>
+
   <div class="short-post-grid">
-    {{ range where .Site.RegularPages "Type" "shuoshuo" }}
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "shuoshuo") 12 }}
+    {{ range $paginator.Pages }}
     <div class="short-post-card">
-      <!-- 头部信息：头像、用户名、时间 -->
       <div class="post-header">
         <img class="avatar" src="{{ "avatar.png" | relURL }}" alt="Avatar">
         <div class="post-meta">
@@ -11,13 +14,15 @@
           <small class="post-time">{{ .Date.Format "2006-01-02" }}</small>
         </div>
       </div>
-      <!-- 内容：将 #话题# 替换为可点击链接 -->
       <div class="post-content">
         {{ $content := .Content }}
-        {{ $contentWithLinks := replaceRE "#(\\S+?)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
+        {{ $contentWithLinks := replaceRE "#([^#]+)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
         {{ $contentWithLinks | safeHTML }}
       </div>
     </div>
     {{ end }}
   </div>
+  <!-- 使用分页组件 -->
+  {{ partial "pagination.html" . }}
 </section>
+{{ end }} 

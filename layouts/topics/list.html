@@ -1,0 +1,35 @@
+{{ define "main" }}
+<section class="topic-posts">
+  <h1 class="topic-title">#{{ .Title }}#</h1>
+  
+  <!-- 调试信息，或者设置 display: none -->
+  <!--
+  <div style="color: red;">
+    当前话题: {{ .Title }}<br>
+    文章数量: {{ len .Pages }}<br>
+    所有页面: {{ range .Pages }}
+      - {{ .Title }} ({{ .Params.topics }})<br>
+    {{ end }}
+  </div>
+  -->
+
+  <div class="short-post-grid">
+    {{ range .Pages }}
+    <div class="short-post-card">
+      <div class="post-header">
+        <img class="avatar" src="{{ "avatar.png" | relURL }}" alt="Avatar">
+        <div class="post-meta">
+          <div class="username">{{ .Site.Params.name }}</div>
+          <small class="post-time">{{ .Date.Format "2006-01-02" }}</small>
+        </div>
+      </div>
+      <div class="post-content">
+        {{ $content := .Content }}
+        {{ $contentWithLinks := replaceRE "#(\\S+?)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
+        {{ $contentWithLinks | safeHTML }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }} 

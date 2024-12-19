@@ -1,12 +1,18 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  <ul>
-    {{ range .Site.RegularPages }}
-      {{ if in .Params.topic .Title }}
-        <li>
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </li>
-      {{ end }}
+<section class="topics-list">
+  <h1 class="page-title">{{ .Title }}</h1>
+  
+  <div class="topics-grid">
+    {{ range $name, $taxonomy := .Site.Taxonomies.topics }}
+    <div class="topic-card">
+      <a href="{{ "/topics/" | relLangURL }}{{ $name | urlize }}" class="topic-link">
+        <h2 class="topic-name">#{{ $name }}#</h2>
+        <div class="topic-meta">
+          <span class="topic-count">{{ $taxonomy.Count }} 篇动态</span>
+        </div>
+      </a>
+    </div>
     {{ end }}
-  </ul>
+  </div>
+</section>
 {{ end }}

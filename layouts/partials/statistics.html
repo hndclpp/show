@@ -10,14 +10,16 @@
   {{ end }}
 
   <!-- 动态统计 -->
-  <span class="count">
-    动态
-    {{ if gt $shuoshuoCount 0 }}
+  <a href="{{ .Site.BaseURL }}shuoshuo">
+    <span class="count">
+      动态
+      {{ if gt $shuoshuoCount 0 }}
       ({{ $shuoshuoCount }})
     {{ else }}
       (0)
     {{ end }}
   </span>
+</a>
 
   <!-- 文章统计 -->
   <a href="{{ .Site.BaseURL }}posts">
