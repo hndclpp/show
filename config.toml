@@ -29,4 +29,3 @@ archetypeDir = "themes/show/archetypes"
 [outputs]
 home = ["HTML", "RSS", "JSON"]
 taxonomy = ["HTML", "RSS"]
-taxonomyTerm = ["HTML", "RSS"]
