@@ -8,10 +8,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-sm) var(--container-padding);
+    padding: clamp(1rem,3vw,1.25rem);
     background: rgba(var(--color-bg-rgb), 0.8);
     border-bottom: 1px dashed var(--color-border);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     
     .logo {
         a {

@@ -17,20 +17,28 @@
 
 // 主题切换相关
 .theme-toggle {
-    background: none;
-    border: none;
-    padding: 0;
     cursor: pointer;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: var(--spacing-xs);
+    border: none;
+    outline: none;
+    background: none;
+    
+    svg {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s ease;
+    }
+    
+    &:hover svg {
+        transform: rotate(30deg);
+    }
 }
 
 // 主题图标显示控制
 .theme-toggle-dark { display: none; }
 .theme-toggle-light { display: block; }
+
+  
 
 [data-theme="dark"] {
     .theme-toggle-dark { display: block; }

@@ -8,7 +8,7 @@ $avatar-size-small: 40px;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
 
   &-content {
     display: flex;
@@ -54,21 +54,22 @@ $avatar-size-small: 40px;
 // 短文章网格
 .short-post {
   &-grid {
-    column-count: 2;
-    column-gap: var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    // padding: var(--spacing-md);
     
     @media screen and (max-width: 768px) {
-      column-count: 1;
+      grid-template-columns: 1fr;
     }
   }
 
   &-card {
-    break-inside: avoid;
-    margin-bottom: var(--spacing-sm);
     background: var(--color-card-bg);
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
     box-shadow: var(--box-shadow);
+    height: fit-content;
     
     .post-content {
       overflow: visible;
@@ -86,7 +87,7 @@ $avatar-size-small: 40px;
         margin-bottom: var(--spacing-xs);
       }
 
-      // 图片网格样式保持不变
+      // 图片网格样式
       .image-grid {
         display: grid;
         gap: var(--spacing-xs);
@@ -98,29 +99,24 @@ $avatar-size-small: 40px;
           border-radius: var(--border-radius);
         }
 
-        // 2张图片：1*2
         &.grid-2 {
           grid-template-columns: repeat(2, 1fr);
         }
 
-        // 3张图片：1*3
         &.grid-3 {
           grid-template-columns: repeat(3, 1fr);
         }
 
-        // 4张图片：2*2
         &.grid-4 {
           grid-template-columns: repeat(2, 1fr);
           grid-template-rows: repeat(2, 1fr);
         }
 
-        // 6张图片：2*3
         &.grid-6 {
           grid-template-columns: repeat(3, 1fr);
           grid-template-rows: repeat(2, 1fr);
         }
 
-        // 9张图片：3*3
         &.grid-9 {
           grid-template-columns: repeat(3, 1fr);
           grid-template-rows: repeat(3, 1fr);
@@ -203,7 +199,6 @@ $avatar-size-small: 40px;
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-md);
-  padding: 0 var(--spacing-sm);
 
   h2 {
     margin: 0;
@@ -221,7 +216,7 @@ $avatar-size-small: 40px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-md);
-  padding: 0 var(--spacing-sm);
+  // padding: 0 var(--spacing-sm);
 }
 
 .post-card {

@@ -4,6 +4,8 @@ type: "page"
 layout: "gallery"
 url: "/gallery/"
 images:
+  - title: "鸟"
+    url: "https://cdn.pixabay.com/photo/2024/08/25/12/33/seagull-8996395_960_720.jpg"
   - title: "大象"
     url: "https://cdn.pixabay.com/photo/2023/09/14/19/46/elephant-8253639_1280.jpg"
   - title: "自行车"
