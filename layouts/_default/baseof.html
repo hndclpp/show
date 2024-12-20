@@ -7,7 +7,6 @@
     <meta name="keywords" content="{{ .Site.Params.keywords }}" />
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont/style.css" media="print" onload="this.media='all'">
-    <script src="//at.alicdn.com/t/c/font_4760005_p60g17ch6q8.js"></script>
     <!-- 主题样式 -->
     {{ $sass := resources.Get "scss/main.scss" }}
     {{ $style := $sass | css.Sass | resources.Minify | resources.Fingerprint }}
@@ -28,6 +27,7 @@
       (resources.Get "js/theme.js")
       (resources.Get "js/menu.js")
       (resources.Get "js/modal.js")
+      (resources.Get "js/svg.js")
     }}
     {{ $combined := $js | resources.Concat "js/main.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{ $combined.RelPermalink }}" integrity="{{ $combined.Data.Integrity }}"></script>
