@@ -30,7 +30,7 @@
     
     @include mobile {
         height: var(--header-height-mobile);
-        padding: 0 var(--spacing-mobile);
+        // padding: 0 var(--spacing-mobile);
         
         .logo a {
             font-size: var(--font-size-h3);

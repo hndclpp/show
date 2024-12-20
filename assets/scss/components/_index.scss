@@ -148,11 +148,11 @@ $avatar-size-small: 40px;
 .post-meta {
   .username {
     font-weight: bold;
-    font-size: 1em;
+    font-size: var(--font-size-meta);
   }
 
   .post-time {
-    font-size: 0.8em;
+    font-size: var(--font-size-meta);
     color: var(--color-secondary);
   }
 }
@@ -230,6 +230,12 @@ $avatar-size-small: 40px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  .post-meta {
+    font-size: var(--font-size-meta);
+  } 
+  .post-summary {
+    font-size: var(--font-size-post);
+  }
 
   &:hover {
     transform: translateY(-1px);
