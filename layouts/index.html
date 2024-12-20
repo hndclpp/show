@@ -30,18 +30,29 @@
           <small class="post-time">{{ .Date.Format "2006-01-02" }}</small>
         </div>
       </div>
-      <!-- 内容：将 #话题# 替换为可点击链接 -->
+      
+      <!-- 内容部分 -->
       <div class="post-content">
         {{ $content := .Content }}
-
-        <!-- 调试信息 -->
-        <!-- <div style="color: red;"> -->
-          <!-- 话题列表: {{ .Params.topics }} -->
-        <!-- </div>  -->
-
-        <!-- 修改话题链接生成逻辑：不再使用 .Params.topics，而是直接从内容中匹配 -->
         {{ $contentWithLinks := replaceRE "#([^#]+)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
-        {{ $contentWithLinks | safeHTML }}
+        
+        <!-- 处理图片网格 -->
+        {{ $images := findRE "<img.*?>" $contentWithLinks }}
+        {{ if gt (len $images) 1 }}
+          <!-- 先显示文本内容 -->
+          {{ $textContent := replaceRE "<img.*?>" "" $contentWithLinks }}
+          {{ $textContent | safeHTML }}
+          
+          <!-- 然后显示图片网格 -->
+          <div class="image-grid grid-{{ len $images }}">
+            {{ range $images }}
+              {{ . | safeHTML }}
+            {{ end }}
+          </div>
+        {{ else }}
+          <!-- 如果只有一张或没有图片，直接显示所有内容 -->
+          {{ $contentWithLinks | safeHTML }}
+        {{ end }}
       </div>
     </div>
     {{ end }}

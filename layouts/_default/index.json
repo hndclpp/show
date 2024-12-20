@@ -1,12 +1,24 @@
 [
-    {{- $pages := where .Site.RegularPages "Type" "post" -}}
+    {{- $pages := union (where .Site.RegularPages "Type" "post") (where .Site.RegularPages "Type" "shuoshuo") -}}
     {{- $len := len $pages -}}
     {{- range $index, $page := $pages -}}
     {
         "title": {{ .Title | jsonify }},
         "permalink": {{ .Permalink | jsonify }},
         "summary": {{ .Summary | plainify | jsonify }},
-        "content": {{ .Content | plainify | jsonify }}
+        "content": {{ .Content | plainify | jsonify }},
+        "type": {{ .Type | jsonify }},
+        "topics": {{ if eq .Type "shuoshuo" }}
+            {{- $topics := findRE "#([^#]+)#" .Content -}}
+            {{- $cleanTopics := slice -}}
+            {{- range $topics -}}
+                {{- $topic := replaceRE "#([^#]+)#" "$1" . -}}
+                {{- $cleanTopics = $cleanTopics | append $topic -}}
+            {{- end -}}
+            {{- $cleanTopics | jsonify -}}
+        {{- else -}}
+            {{- .Params.topics | default slice | jsonify -}}
+        {{- end }}
     }{{ if ne (add $index 1) $len }},{{ end }}
     {{- end -}}
 ]

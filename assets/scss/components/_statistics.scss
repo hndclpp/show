@@ -1,4 +1,4 @@
-.categories-container {
+.statistics-container {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: var(--spacing-md);
@@ -11,84 +11,60 @@
         font-size: var(--font-size-h1);
     }
 
-    // 话题部分
-    .topics-section {
-        margin-bottom: var(--spacing-lg);
+    // 话题和标签通用网格布局
+    .topics-grid,
+    .tags-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--spacing-md);
+    }
 
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: var(--spacing-md);
+    // 话题和标签通用卡片样式
+    .topic-card,
+    .tag-item {
+        background: var(--color-card-bg);
+        border-radius: var(--border-radius);
+        padding: var(--spacing-md);
+        border: 1px solid var(--color-border);
+        transition: all var(--transition-normal);
+        text-decoration: none;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
         }
+    }
 
-        .topic-card {
-            background: var(--color-card-bg);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            text-decoration: none;
-            transition: all var(--transition-normal);
-            border: 1px solid var(--color-border);
+    // 话题样式
+    .topic-name,
+    .tag-item {
+        margin: 0;
+        color: var(--color-topic);
+        font-size: var(--font-size-h3);
+    }
 
-            &:hover {
-                transform: translateY(-2px);
-                box-shadow: var(--box-shadow);
-            }
-        }
-
-        .topic-name {
-            margin: 0;
-            color: var(--color-topic);
-            font-size: var(--font-size-h3);
-        }
-
-        .topic-meta {
+    // 标签样式
+    .tag-item {
+        .tag-count {
+            display: block;
             margin-top: var(--spacing-sm);
             color: var(--color-secondary);
             font-size: var(--font-size-meta);
         }
     }
 
-    // 标签部分
-    .tags-section {
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-sm);
-            justify-content: center;
-        }
-
-        .tag-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--color-card-bg);
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            color: var(--color-text);
-            text-decoration: none;
-            transition: all var(--transition-normal);
-
-            &:hover {
-                background: var(--color-primary);
-                color: white;
-                border-color: var(--color-primary);
-                transform: translateY(-2px);
-            }
-        }
-
-        .tag-count {
-            background: var(--color-tag-bg);
-            padding: 0.2rem 0.5rem;
-            border-radius: 1rem;
-            font-size: var(--font-size-meta);
-        }
+    // 计数样式
+    .topic-meta,
+    .tag-count {
+        margin-top: var(--spacing-sm);
+        color: var(--color-secondary);
+        font-size: var(--font-size-meta);
     }
 }
 
 // 移动端适配
 @include mobile {
-    .categories-container {
+    .statistics-container {
         padding: var(--spacing-mobile);
 
         .section-title {
@@ -96,18 +72,15 @@
             font-size: var(--font-size-h2);
         }
 
-        .topics-grid {
+        .topics-grid,
+        .tags-container {
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: var(--spacing-sm);
         }
 
-        .topic-card {
-            padding: var(--spacing-sm);
-        }
-
+        .topic-card,
         .tag-item {
-            padding: 0.4rem 0.8rem;
-            font-size: var(--font-size-small);
+            padding: var(--spacing-sm);
         }
     }
 } 

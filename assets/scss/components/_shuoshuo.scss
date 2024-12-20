@@ -1,16 +1,41 @@
 .shuoshuo-list {
   margin: 0 auto;
+  max-width: 1200px;
+  
+  .short-post-grid {
+    column-count: 2;
+    column-gap: var(--spacing-md);
+    
+    @media screen and (max-width: 768px) {
+      column-count: 1;
+    }
+  }
+
+  .short-post-card {
+    break-inside: avoid;
+    margin-bottom: var(--spacing-sm);
+    background: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    box-shadow: var(--box-shadow);
+  }
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: var(--spacing-lg);
+.post-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
   
-  h1 {
-    margin: 0;
-    color: var(--color-text);
-    font-size: 2rem;
+  &:hover {
+    .post-content {
+      color: var(--color-text);
+    }
   }
+}
+
+.post-topic {
+  position: relative;
+  z-index: 1;
 }
 
 /* 分页样式 */
@@ -54,11 +79,40 @@
 
 /* 响应式调整 */
 @media screen and (max-width: 768px) {
+  .shuoshuo-list {
+    .short-post-card {
+      .post-content {
+        .shuoshuo-image-grid {
+          &.grid-3,
+          &.grid-6,
+          &.grid-9 {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto;
+          }
+        }
+      }
+    }
+  }
+  
   .page-numbers {
     display: none; // 在移动端只显示上一页/下一页
   }
   
   .pagination {
     justify-content: space-between;
+  }
+} 
+
+.shuoshuo-single {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  
+  .short-post-card {
+    background: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    box-shadow: var(--box-shadow);
+    margin-bottom: var(--spacing-md);
   }
 } 

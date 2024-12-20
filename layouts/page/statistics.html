@@ -1,33 +1,30 @@
 {{ define "main" }}
 <div class="statistics-container">
     <!-- 话题部分 -->
-    <section class="topics-list">
-        <h1 class="page-title">话题</h1>
-        
+    <section class="topics-section">
+        <h2 class="section-title">话题</h2>
         <div class="topics-grid">
-          {{ range $name, $taxonomy := .Site.Taxonomies.topics }}
-          <div class="topic-card">
-            <a href="{{ "/topics/" | relLangURL }}{{ $name | urlize }}" class="topic-link">
-              <h2 class="topic-name">#{{ $name }}#</h2>
-              <div class="topic-meta">
-                <span class="topic-count">{{ $taxonomy.Count }} 篇动态</span>
-              </div>
-            </a>
-          </div>
-          {{ end }}
+            {{ range $name, $taxonomy := .Site.Taxonomies.topics }}
+            <div class="topic-card">
+                <a href="{{ "/topics/" | relLangURL }}{{ $name | urlize }}" class="topic-link">
+                    <h3 class="topic-name">#{{ $name }}#</h3>
+                    <div class="topic-meta">
+                        <span class="topic-count">{{ $taxonomy.Count }} 篇动态</span>
+                    </div>
+                </a>
+            </div>
+            {{ end }}
         </div>
-      </section>
-
-      <hr>
+    </section>
 
     <!-- 标签部分 -->
-    <section class="tags-page">
-        <h1 class="tags-title">标签</h1>
+    <section class="tags-section">
+        <h2 class="section-title">标签</h2>
         <div class="tags-container">
             {{ range .Site.Taxonomies.tags }}
             <a href="{{ .Page.RelPermalink }}" class="tag-item">
-                {{ .Page.Title }}
-                <span class="tag-count">{{ .Count }}</span>
+                #{{ .Page.Title }}
+                <span class="tag-count">{{ .Count }}篇文章</span>
             </a>
             {{ end }}
         </div>

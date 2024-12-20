@@ -7,22 +7,36 @@
     {{ $paginator := .Paginate (where .Site.RegularPages "Type" "shuoshuo") 12 }}
     {{ range $paginator.Pages }}
     <div class="short-post-card">
-      <div class="post-header">
-        <img class="avatar" src="{{ "avatar.png" | relURL }}" alt="Avatar">
-        <div class="post-meta">
-          <div class="username">{{ .Site.Params.name }}</div>
-          <small class="post-time">{{ .Date.Format "2006-01-02" }}</small>
+      <a href="{{ .Permalink }}" class="post-link">
+        <div class="post-header">
+          <img class="avatar" src="{{ "avatar.png" | relURL }}" alt="Avatar">
+          <div class="post-meta">
+            <div class="username">{{ .Site.Params.name }}</div>
+            <small class="post-time">{{ .Date.Format "2006-01-02" }}</small>
+          </div>
         </div>
-      </div>
-      <div class="post-content">
-        {{ $content := .Content }}
-        {{ $contentWithLinks := replaceRE "#([^#]+)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
-        {{ $contentWithLinks | safeHTML }}
-      </div>
+        <div class="post-content">
+          {{ $content := .Content }}
+          {{ $contentWithLinks := replaceRE "#([^#]+)#" "<a href='/topics/$1/' class='post-topic'>#$1#</a>" $content }}
+          
+          {{ $images := findRE "<img.*?>" $contentWithLinks }}
+          {{ if gt (len $images) 1 }}
+            {{ $textContent := replaceRE "<img.*?>" "" $contentWithLinks }}
+            {{ $textContent | safeHTML }}
+            
+            <div class="image-grid grid-{{ len $images }}">
+              {{ range $images }}
+                {{ . | safeHTML }}
+              {{ end }}
+            </div>
+          {{ else }}
+            {{ $contentWithLinks | safeHTML }}
+          {{ end }}
+        </div>
+      </a>
     </div>
     {{ end }}
   </div>
-  <!-- 使用分页组件 -->
   {{ partial "pagination.html" . }}
 </section>
 {{ end }} 

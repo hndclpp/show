@@ -56,7 +56,10 @@ $avatar-size-small: 40px;
   &-grid {
     column-count: 2;
     column-gap: var(--spacing-md);
-    margin: var(--spacing-md) auto;
+    
+    @media screen and (max-width: 768px) {
+      column-count: 1;
+    }
   }
 
   &-card {
@@ -66,24 +69,63 @@ $avatar-size-small: 40px;
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
     box-shadow: var(--box-shadow);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    
+    .post-content {
+      overflow: visible;
+      
+      p {
+        img {
+          width: 100%;
+          border-radius: var(--border-radius);
+          object-fit: cover;
+        }
+      }
 
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--box-shadow);
-    }
+      .post-topic {
+        display: inline-block;
+        margin-bottom: var(--spacing-xs);
+      }
 
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: var(--border-radius);
-      margin: var(--spacing-xs) 0;
-    }
+      // 图片网格样式保持不变
+      .image-grid {
+        display: grid;
+        gap: var(--spacing-xs);
+        
+        img {
+          width: 100%;
+          aspect-ratio: 1;
+          object-fit: cover;
+          border-radius: var(--border-radius);
+        }
 
-    p {
-      margin: 0;
-      color: var(--color-text);
-      line-height: 1.6;
+        // 2张图片：1*2
+        &.grid-2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        // 3张图片：1*3
+        &.grid-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        // 4张图片：2*2
+        &.grid-4 {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+        }
+
+        // 6张图片：2*3
+        &.grid-6 {
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+        }
+
+        // 9张图片：3*3
+        &.grid-9 {
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+        }
+      }
     }
   }
 }
@@ -208,7 +250,7 @@ $avatar-size-small: 40px;
   &-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-md);
+    gap: var(--space-image);
     padding: 0 var(--spacing-sm);
   }
 
@@ -272,5 +314,23 @@ $avatar-size-small: 40px;
   
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.short-post-card {
+  .post-content {
+    .image-grid {
+      display: grid;
+      gap: var(--space-image);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 0;
+      }
+    }
   }
 }
