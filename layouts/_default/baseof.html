@@ -15,6 +15,7 @@
     <title>{{ .Site.Title }}</title>
   </head>
   <body>
+
     {{ partial "header.html" . }}
     <main class="container">
       {{ block "main" . }}{{ end }}
@@ -24,6 +25,7 @@
 
     <!-- 基础功能JS -->
     {{ $js := slice 
+      (resources.Get "js/plum.js")
       (resources.Get "js/theme.js")
       (resources.Get "js/menu.js")
       (resources.Get "js/modal.js")
